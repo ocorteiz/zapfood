@@ -14,7 +14,7 @@ Este é o frontend de um sistema de delivery desenvolvido em Angular, utilizando
 - **API Evolution** - Para envio de notificações via WhatsApp
 - **Mercado Pago API** - Para processamento de pagamentos via Pix
 
-## ⚙️ Funcionalidades
+## Funcionalidades
 
 - **Gerenciamento de Carrinho**: Adição, remoção e atualização de itens no carrinho
 - **Gerenciamento de Produtos**: Exibição, busca e filtro de produtos
