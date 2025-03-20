@@ -1,27 +1,45 @@
-# Zapfood
+# Frontend do Sistema de Delivery
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.2.
+## Descrição
 
-## Development server
+Este é o frontend de um sistema de delivery desenvolvido em Angular, utilizando conceitos de programação reativa e seguindo padrões de programação. O sistema é fortemente baseado em componentes para garantir modularidade e reutilização de código.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Tecnologias Utilizadas
 
-## Code scaffolding
+- **Angular** - Framework para desenvolvimento frontend
+- **RxJS** - Para programação reativa
+- **TypeScript** - Linguagem utilizada no desenvolvimento
+- **SCSS** - Para estilização do sistema
+- **iText** - Para geração de notas fiscais em PDF
+- **API Evolution** - Para envio de notificações via WhatsApp
+- **Mercado Pago API** - Para processamento de pagamentos via Pix
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## ⚙️ Funcionalidades
 
-## Build
+- **Gerenciamento de Carrinho**: Adição, remoção e atualização de itens no carrinho
+- **Gerenciamento de Produtos**: Exibição, busca e filtro de produtos
+- **Gerenciamento de Cupons**: Aplicação de cupons de desconto no pedido
+- **Integração com API Evolution**: Envio de notificações automáticas via WhatsApp
+- **Integração com Mercado Pago**: Pagamento de pedidos via Pix
+- **Geração de Nota Fiscal**: Utiliza a biblioteca iText para gerar PDF da nota fiscal do pedido
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Instalação
 
-## Running unit tests
+1. Clone o repositório:
+   ```sh
+   git clone https://github.com/seu-usuario/frontend-delivery.git
+   ```
+2. Acesse o diretório do projeto:
+   ```sh
+   cd frontend-delivery
+   ```
+3. Instale as dependências:
+   ```sh
+   npm install
+   ```
+4. Inicie o servidor de desenvolvimento:
+   ```sh
+   ng serve
+   ```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### Projeto Desenvolvido por Luis Felipe Cortêz
