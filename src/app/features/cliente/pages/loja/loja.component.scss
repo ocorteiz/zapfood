@@ -1,0 +1,83 @@
+:host {
+
+  h1,
+  h2,
+  h3,
+  p {
+    color: var(--black);
+  }
+
+  main {
+    padding: 0% 30%;
+
+    aside {
+
+      div {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        justify-content: left;
+        gap: 20px;
+      }
+
+      i {
+        font-size: 2em;
+        cursor: pointer;
+      }
+
+      hr {
+        margin: 0;
+      }
+    }
+
+    section.detalhes {
+
+      div.nome {
+        h1 {
+          font-size: 2em;
+          margin: 10px 0px 0px 0px;
+        }
+
+        p {
+          margin-bottom: 20px;
+        }
+      }
+
+      div.info {
+
+        h2 {
+          color: var(--white-010);
+          margin-top: 10px;
+          font-size: 1em;
+          background-color: rgb(209, 209, 209);
+          padding: 5px;
+        }
+
+        div.horario {
+          margin-top: 10px;
+
+          h3 {
+            color: var(--primary);
+          }
+        }
+
+      }
+
+      div.endereco {
+
+        p {
+          margin-top: 10px;
+        }
+
+      }
+
+    }
+
+  }
+
+  @media screen and (max-width: 576px) {
+    main {
+      padding: 0% 5%;
+    }
+  }
+}

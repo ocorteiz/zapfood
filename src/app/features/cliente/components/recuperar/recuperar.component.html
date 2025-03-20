@@ -1,0 +1,34 @@
+<div *ngIf="getLoja() as loja" class="logo">
+  <img [src]="getImageUrl(loja.logo)" alt="">
+</div>
+<div class="form register">
+  <i class="bi bi-x-lg" [routerLink]="'/'"></i>
+  <h1>Recuperar senha!</h1>
+  <p>Informe o codigo enviado em seu numero e sua nova senha!</p>
+  <form (ngSubmit)="onSubmit()" [formGroup]="novaSenhaForm">
+
+    <label>
+      <input placeholder="Codigo" type="number" name="codigo" formControlName="codigo" required  />
+    </label>
+
+    <label>
+      <input placeholder="Senha" type="password" name="senha" formControlName="senha" required  />
+    </label>
+
+    <label>
+      <input placeholder="Confirmar senha" type="password" name="confirmarSenha" formControlName="confirmarSenha" required  />
+    </label>
+
+    <div *ngIf="message" class="message">
+      <p>{{ message.toUpperCase() }}</p>
+    </div>
+
+    <div *ngIf="erro" class="erro">
+      <p>{{ erro.toUpperCase() }}</p>
+    </div>
+
+    <button type="submit">
+      <h2>CONFIRMAR</h2>
+    </button>
+  </form>
+</div>

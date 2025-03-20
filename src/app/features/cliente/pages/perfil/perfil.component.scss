@@ -1,0 +1,54 @@
+:host {
+
+  h1,h2, p {
+    color: var(--black);
+  }
+
+  main {
+    padding: 0% 30%;
+    padding-bottom: 66px;
+
+    aside {
+
+      div {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        justify-content: left;
+        gap: 20px;
+      }
+
+      i {
+        font-size: 2em;
+        cursor: pointer;
+      }
+
+      hr {
+        margin: 0;
+      }
+    }
+
+    h1 {
+      margin: 10px 0px;
+    }
+
+    div.paginas {
+      p {
+        text-decoration: underline;
+        cursor: pointer;
+      }
+
+      p.logout {
+        font-weight: bold;
+      }
+    }
+
+  }
+
+  @media screen and (max-width: 576px) {
+    main {
+      padding: 0% 5%;
+    }
+  }
+
+}

@@ -1,0 +1,34 @@
+<div *ngIf="showAddEspecificacao" class="overlay">
+  <app-form-especificacao *ngIf="showAddEspecificacao" [mode]="'update'" [id]="especificacao?.id" (close)="toggleUpdateEspecificacao()" (messageEvent)="receberMensagem($event)" ></app-form-especificacao>
+</div>
+
+<div *ngIf="showDelete" class="overlay">
+  <div class="conteudo">
+    <aside>
+      <div class="title">
+        <i class="bi bi-arrow-left-short" (click)="toggleDelete(null)"></i>
+        <p>ATENÇÃO</p>
+      </div>
+      <hr>
+    </aside>
+
+    <p class="description">AO DELETAR ESPECIFICAÇÃO, TODOS OS DADOS DE <strong>PEDIDOS</strong> VINCULADO A ESSA SERÃO PERDIDOS</p>
+    <hr>
+    <button (click)="deletarAdicional(id)">
+      <h2>DELETAR</h2>
+    </button>
+  </div>
+</div>
+
+<div *ngFor="let adicional of getEspecificacoes" class="adicional" [class.desativado]="adicional.status === false">
+  <div class="text">
+      <h2>{{ adicional.nome.toUpperCase() }}</h2>
+      <p>{{ adicional.descricao.toUpperCase() }}</p>
+  </div>
+  <div class="edit">
+    <h2 class="delete" (click)="toggleDelete(adicional.id)">DELETAR</h2>
+    <h2 *ngIf="adicional.status" class="desative" (click)="desativarEspecificacao(adicional.id)">DESATIVAR</h2>
+    <h2 *ngIf="!adicional.status" class="ative" (click)="ativarEspecificacao(adicional.id)">ATIVAR</h2>
+    <h2 class="update" (click)="selectEspecificacaoToUpdate(adicional); toggleUpdateEspecificacao()">ATUALIZAR</h2>
+  </div>
+</div>

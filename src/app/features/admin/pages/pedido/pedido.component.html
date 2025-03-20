@@ -1,0 +1,147 @@
+<app-header></app-header>
+
+<main>
+  <aside *ngIf="getPedido() as pedido" class="pedido">
+    <div>
+      <i class="bi bi-arrow-left-short" [routerLink]="['/admin/pedidos']"></i>
+      <h1>PEDIDO #{{pedido.id}}</h1>
+      <p class="data"> {{ pedido.dataDeCriacao | date: 'dd/MM/yyyy HH:mm:ss' }} </p>
+    </div>
+    <hr>
+  </aside>
+  <section *ngIf="getPedido() as pedido" class="conteudo">
+
+    <!-- CONTAINER MOTIVO -->
+
+    <div *ngIf="showNegar" class="overlay">
+      <div class="conteudo">
+        <aside class="container">
+          <div class="title">
+            <i class="bi bi-arrow-left-short" (click)="toggleNegar()"></i>
+            <p>MOTIVO DE NEGAÇÃO</p>
+          </div>
+        </aside>
+
+        <textarea id="motivo" class="motivo" [(ngModel)]="motivo" rows="4" cols="50"></textarea>
+
+        <button (click)="negarPedido(pedido.id)">
+          <h2>NEGAR</h2>
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="showCancelar" class="overlay">
+      <div class="conteudo">
+        <aside class="container">
+          <div class="title">
+            <i class="bi bi-arrow-left-short" (click)="toggleCancelar()"></i>
+            <p>CANCELAR PEDIDO</p>
+          </div>
+        </aside>
+        <hr>
+        <p>TEM CERTEZA QUE DESEJA CANCELAR ESSE PEDIDO?</p>
+        <hr>
+        <button (click)="cancelarPedido(pedido.id)">
+          <h2>CANCELAR</h2>
+        </button>
+      </div>
+    </div>
+
+    <!-- MESSAGEM DE ERRO -->
+
+    <div *ngIf="messageSucess" class="alert alert-success">
+      <h2>{{messageSucess.toUpperCase()}}</h2>
+    </div>
+
+    <div *ngIf="messageError" class="alert alert-error">
+      <h2>{{messageError.toUpperCase()}}</h2>
+    </div>
+
+    <!-- INFO PEDIDO -->
+
+    <div class="cliente-status">
+      <h2>CLIENTE: <span>{{ pedido.cliente.nome.toUpperCase() }} (+{{ pedido.cliente.telefone }})</span></h2>
+      <button>
+        <h2>{{ pedido.status.toUpperCase() }}</h2>
+      </button>
+    </div>
+
+    <div class="itens">
+      <h2>ITENS:</h2>
+      <app-card-item [getItens]="pedido.itens" [visible]="false"></app-card-item>
+    </div>
+
+    <div class="pagamento">
+      <h2>MÉTODO DE PAGAMENTO: <span>{{ pedido.metodoDePagamento.toUpperCase() }}</span></h2>
+    </div>
+
+    <div class="cupom">
+      <h2>CUPOM: </h2>
+      <div *ngIf="pedido.cupom" class="cupomSelecionado">
+        <div>
+          <h2>{{ pedido.cupom.nome.toUpperCase() }}</h2>
+          <p>{{ pedido.cupom.descricao.toUpperCase() }}</p>
+          <p>PARA PEDIDO ACIMA DE: {{ pedido.cupom.valorParaPedido | currency:'BRL':'symbol':'1.2-2' }} </p>
+          <h2>VALIDADE: {{ pedido.cupom.dataDeValidade | date:'dd/MM/yyyy'}}</h2>
+        </div>
+        <img src="../../../assets/logo-cupom.png" alt="">
+      </div>
+    </div>
+
+    <div class="endereco">
+      <h2>ENDEREÇO: </h2>
+      <span class="endereco"> BAIRRO {{ getPedido()?.endereco?.bairro?.toUpperCase() }}, RUA {{
+        getPedido()?.endereco?.rua?.toUpperCase()
+        }}, Nº{{ getPedido()?.endereco?.numero }}
+        <span *ngIf="getPedido()?.endereco?.complemento">, {{
+          getPedido()?.endereco?.complemento?.toUpperCase() }} </span>
+      </span>
+    </div>
+
+    <div class="observacao">
+      <h2>OBSERVAÇÃO: <span *ngIf="pedido.observacao">{{ pedido.observacao.toUpperCase() }}</span></h2>
+    </div>
+
+    <hr>
+
+    <div class="valores">
+      <h2>SUBTOTAL: <span>{{ pedido.subtotal | currency:'BRL':'symbol':'1.2-2' }}</span></h2>
+      <h2>DESCONTO: <span>{{ pedido.desconto | currency:'BRL':'symbol':'1.2-2' }}</span></h2>
+      <h2>TAXA DE ENTREGA: <span>{{ pedido.taxaDeEntrega | currency:'BRL':'symbol':'1.2-2' }}</span></h2>
+      <h2>TOTAL: <span>{{ pedido.total | currency:'BRL':'symbol':'1.2-2' }}</span></h2>
+    </div>
+
+    <hr>
+
+    <div class="btns">
+
+      <button (click)="aceitarPedido(pedido.id)" *ngIf="pedido.status === 'AGUARDANDO ACEITACAO'">
+        <h2>ACEITAR</h2>
+      </button>
+
+      <button (click)="enviarPedido(pedido.id)" *ngIf="pedido.status === 'EM PREPARO'">
+        <h2>ENVIAR</h2>
+      </button>
+
+      <button (click)="finalizarPedido(pedido.id)" *ngIf="pedido.status === 'A CAMINHO'">
+        <h2>FINALIZAR</h2>
+      </button>
+
+      <button class="negar" (click)="toggleNegar()"
+      *ngIf="pedido.status !== 'CANCELADO' && pedido.status !== 'FINALIZADO' && pedido.status !== 'NEGADO'">
+        <h2>NEGAR</h2>
+      </button>
+
+      <button class="negar" (click)="toggleCancelar()"
+      *ngIf="pedido.status !== 'NEGADO' && pedido.status !== 'FINALIZADO' && pedido.status !== 'CANCELADO'">
+        <h2>CANCELAR</h2>
+      </button>
+
+      <button class="nota" (click)="gerarNota(pedido.id)">
+        <h2>GERAR NOTA</h2>
+      </button>
+
+    </div>
+
+  </section>
+</main>

@@ -1,0 +1,182 @@
+:host {
+
+  h1,
+  h2,
+  p {
+    color: var(--black);
+  }
+
+  main {
+    padding: 0% 30%;
+    padding-bottom: 66px;
+
+    aside {
+
+      div {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        justify-content: left;
+        gap: 20px;
+      }
+
+      i {
+        font-size: 2em;
+        cursor: pointer;
+      }
+
+      hr {
+        margin: 0;
+      }
+    }
+
+    section.status {
+      margin-bottom: 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      div.progress-bar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+
+        div.step {
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          background-color: #aaaaaa;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        span.step-label {
+          text-align: center;
+          font-size: .8em;
+          color: #aaaaaa;
+          position: relative;
+          top: 50px;
+        }
+
+        div.line {
+          height: 5px;
+          width: 100px;
+          background-color: #aaaaaa;
+        }
+
+        div.completed {
+          background-color: var(--primary);
+        }
+
+        span.completed {
+          color: var(--primary);
+        }
+
+      }
+
+    }
+
+    section.info {
+
+      h2.title {
+        width: 100%;
+        border-radius: 0px 0px 10px 10px;
+        background-color: #aaaaaa;
+        color: var(--white);
+        padding: 10px;
+      }
+
+      div {
+        margin: 10px 0px;
+
+        p {
+          font-size: .9em;
+        }
+      }
+
+      p.endereco {
+        margin: 10px 0px;
+      }
+
+      div.cupomSelecionado {
+        cursor: pointer;
+        background-color: var(--white);
+        border-radius: 5px;
+        border: 1px solid rgb(195, 195, 195);
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px;
+        margin-bottom: 10px;
+
+        h1,
+        p {
+          font-size: .8em;
+        }
+
+        img {
+          width: 50px;
+          height: 50px;
+        }
+      }
+    }
+
+    section.valores {
+      margin-bottom: 10px;
+
+      h1 {
+        font-size: 1em;
+      }
+
+      div {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .subtotal,
+      .desconto,
+      .taxa-de-entrega {
+        h1 {
+          font-weight: 300;
+        }
+      }
+
+    }
+
+  }
+
+  @media screen and (max-width: 576px) {
+
+    main {
+      padding: 0% 5%;
+      padding-bottom: 66px;
+
+      section.status {
+        margin-bottom: 30px;
+
+        div.progress-bar {
+          width: 80%;
+
+          div.step {
+            width: 20px;
+            height: 20px;
+          }
+
+          span.step-label {
+            font-size: .6em;
+            top: 30px;
+          }
+
+        }
+
+      }
+
+    }
+
+  }
+
+}

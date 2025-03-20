@@ -1,0 +1,78 @@
+:host {
+
+
+  section.form-endereco {
+    background-color: var(--white);
+    border-radius: 10px;
+    padding: 10px;
+
+    aside {
+
+      div {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      i {
+        font-size: 2em;
+        cursor: pointer;
+      }
+
+      hr {
+        margin: 0;
+        margin-bottom: 10px;
+      }
+    }
+
+    form {
+
+      h2,
+      p {
+        color: var(--black);
+      }
+
+      select,
+      input {
+        appearance: none;
+        width: 100%;
+        padding: 15px;
+        margin-bottom: 20px;
+        border: 1px solid rgb(209, 209, 209);
+      }
+
+      .bairro {
+        h2 {
+          background-color: rgb(209, 209, 209);
+          padding: 10px;
+        }
+      }
+
+      .numero {
+        width: 30%;
+      }
+
+      .erro {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+
+        p {
+          color: red;
+          font-size: .9em;
+        }
+      }
+
+      button {
+        justify-content: center;
+
+        h2 {
+          color: white;
+        }
+      }
+
+    }
+
+  }
+
+}

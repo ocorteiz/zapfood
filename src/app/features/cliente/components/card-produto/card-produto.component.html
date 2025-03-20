@@ -1,0 +1,8 @@
+<div *ngFor="let item of getProdutos" class="card" [routerLink]="['/', dynamicParam, 'produto', item.id]">
+  <div class="text">
+    <h2>{{ item.nome.toUpperCase() }}</h2>
+    <p>{{ item.descricao.toUpperCase() | slice:0:40}}...</p>
+    <h2>{{ item.preco | currency:'BRL':'symbol':'1.2-2'}}</h2>
+  </div>
+  <img [src]="getImageUrl(item.imagem)" alt="Imagem de {{item.nome}}">
+</div>

@@ -1,0 +1,106 @@
+:host {
+
+  p {
+    color: var(--black);
+  }
+
+  main {
+    padding: 0% 30%;
+
+    aside {
+
+      div {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        justify-content: left;
+        gap: 20px;
+      }
+
+      i {
+        font-size: 2em;
+        cursor: pointer;
+      }
+
+      hr {
+        margin: 0;
+      }
+    }
+
+    section.cupons {
+      margin-top: 10px;
+
+      div.alert {
+        margin: 5px 0px;
+        margin-bottom: 10px;
+        width: 100%;
+
+        h2 {
+          padding: 5px;
+          border-radius: 5px;
+          color: var(--white-010);
+          text-align: center;
+        }
+
+      }
+
+      div.alert-success {
+        h2 {
+          background-color: rgb(0, 187, 0);
+        }
+      }
+
+      div.alert-error {
+        h2 {
+          background-color: red;
+        }
+      }
+
+      label {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 5px;
+        margin-bottom: 5px;
+        text-transform: uppercase;
+        width: 300px;
+        outline: none;
+        border: 1px solid #58658c70;
+        border-radius: 2px;
+        width: 100%;
+
+        input {
+          border: none;
+          outline: none;
+          background-color: var(--white-010);
+          padding-left: 5px;
+        }
+
+        h2 {
+          background-color: green;
+          height: 100%;
+          padding: 10px;
+          transition: .3s;
+
+          &:hover {
+            cursor: pointer;
+            background-color: rgb(0, 179, 0);
+          }
+        }
+
+      }
+
+    }
+
+  }
+
+  @media screen and (max-width: 576px) {
+
+    main {
+      padding: 0% 5%;
+    }
+
+  }
+
+
+}

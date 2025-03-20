@@ -1,0 +1,9 @@
+<div *ngFor="let cupom of getCupons; let i = index"  class="cupom" (click)="onCupomClick(); selectCupom(i)">
+  <div>
+    <h1>{{ cupom.nome.toUpperCase() }}</h1>
+    <p>{{ cupom.descricao.toUpperCase() }}</p>
+    <p>PARA PEDIDO ACIMA DE: {{ cupom.valorParaPedido | currency:'BRL':'symbol':'1.2-2' }} </p>
+    <h1>VALIDADE: {{ cupom.dataDeValidade | date:'dd/MM/yyyy'}}</h1>
+  </div>
+  <img src="../../../assets/logo-cupom.png" alt="">
+</div>

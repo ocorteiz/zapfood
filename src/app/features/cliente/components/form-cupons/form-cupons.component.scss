@@ -1,0 +1,48 @@
+:host {
+
+  p {
+    color: var(--black);
+  }
+
+  section.form-cupons {
+    background-color: var(--white-010);
+    border-radius: 10px;
+    padding: 10px;
+    max-height: 500px;
+    overflow-y: auto;
+
+    aside {
+
+      div {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        justify-content: left;
+        gap: 20px;
+      }
+
+      i {
+        font-size: 2em;
+        cursor: pointer;
+      }
+
+      hr {
+        margin: 0;
+      }
+    }
+
+    section.cupons {
+      margin-top: 20px;
+    }
+
+  }
+
+  @media screen and (max-width: 576px) {
+
+    main {
+      padding: 0% 5%;
+    }
+
+  }
+
+}

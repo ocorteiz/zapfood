@@ -1,0 +1,253 @@
+:host {
+
+  .inativa {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  app-header {
+    width: 100%;
+  }
+
+  h1,
+  h2,
+  h3 {
+    color: var(--black);
+  }
+
+  main {
+    width: 100%;
+    padding: 0% 20%;
+    padding-bottom: 66px;
+    padding-top: 10px;
+    flex: 1;
+
+    aside {
+
+      h2.cupom {
+        color: var(--primary);
+      }
+
+      div {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+
+        .aberta {
+          color: rgb(0, 205, 0);
+        }
+
+        .fechada {
+          color: red;
+        }
+
+      }
+
+      p {
+        text-align: right;
+        color: gray;
+      }
+
+      .detalhes {
+        cursor: pointer;
+      }
+
+    }
+
+    .menu {
+      margin-top: 10px;
+      background-color: var(--white);
+      height: 56px;
+      padding: 10px;
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      z-index: 1000;
+
+      &.fixed {
+        margin-top: 0px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.174);
+      }
+
+      .menu-container {
+        display: flex;
+        overflow-x: auto;
+        gap: 10px;
+        max-width: 100%;
+
+        &::-webkit-scrollbar {
+          height: 8px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background-color: var(--primary);
+          border-radius: 10px;
+        }
+
+        &::-webkit-scrollbar-track {
+          background: #f1f1f1;
+        }
+
+        .menu-item {
+          padding: 5px;
+          border: 1px solid var(--primary);
+          border-radius: 5px;
+          font-weight: 500;
+          color: var(--primary);
+          transition: .5s;
+          white-space: nowrap;
+          color: var(--primary);
+
+
+          &:hover,
+          &:active {
+            background-color: var(--primary);
+            color: var(--white);
+          }
+
+        }
+
+      }
+
+    }
+
+
+    .peca-novamente {
+      padding-top: 10px;
+
+      .conteudo-1 {
+        padding-top: 20px;
+
+        app-card-pedido-anterior {
+          display: flex;
+          gap: 30px;
+          justify-content: flex-start;
+        }
+      }
+
+    }
+
+    .promocao {
+      padding-top: 20px;
+
+      .conteudo-2 {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        padding-top: 20px;
+        position: relative;
+
+        i {
+          font-size: 2em;
+          cursor: pointer;
+          transition: .5s;
+          color: rgb(179, 179, 179);
+
+          position: absolute;
+
+          &:hover {
+            transform: scale(1.3);
+          }
+        }
+
+        .bi-caret-left-fill {
+          top: 100px;
+          left: 0px;
+        }
+
+        .bi-caret-right-fill {
+          top: 100px;
+          right: 0px;
+        }
+
+      }
+
+      app-card-promocao {
+        display: flex;
+        align-items: center;
+
+        .card {
+          background-color: red;
+        }
+      }
+
+    }
+
+    .categoria {
+      padding-top: 20px;
+
+      .produtos {
+        padding-top: 10px;
+        width: 100%;
+
+        app-card-produto {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 10px;
+          width: 100%;
+        }
+      }
+
+    }
+
+  }
+
+  @media screen and (max-width: 576px) {
+
+
+    main {
+      padding: 0% 5%;
+      padding-top: 10px;
+
+      p {
+        max-width: 150px;
+        font-size: 1em;
+      }
+    }
+
+    main {
+      padding-bottom: 66px;
+
+      .menu {
+        padding: 10px 5%;
+
+        .menu-container {
+          .menu-item {
+            margin-bottom: 0px;
+          }
+        }
+      }
+
+      .peca-novamente {
+
+        .conteudo-1 {
+
+          app-card-pedido-anterior {
+            gap: 10px;
+            justify-content: space-around;
+          }
+        }
+
+      }
+
+
+      .categoria {
+        .produtos {
+          app-card-produto {
+            grid-template-columns: repeat(1, 1fr);
+          }
+        }
+      }
+
+    }
+
+  }
+
+}

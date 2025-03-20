@@ -1,0 +1,144 @@
+:host {
+
+  h1,
+  h2,
+  p {
+    color: #58658c;
+    font-size: 1em;
+  }
+
+  .container-especificacoes {
+    overflow: auto;
+    max-height: 500px;
+    width: 500px;
+    background-color: var(--white-010);
+    border-radius: 10px;
+    padding: 10px 20px;
+
+    aside {
+      width: 100%;
+
+      i {
+        cursor: pointer;
+        font-size: 2em;
+        color: #58658c;
+      }
+
+      div {
+        display: flex;
+        align-items: center;
+      }
+
+      hr {
+        margin: 0px;
+      }
+    }
+
+    label.search {
+      margin-top: 10px;
+      background-color: var(--white);
+      cursor: context-menu;
+      display: flex;
+      align-items: center;
+      border: 1px solid #58658c;
+      border-radius: 40px;
+      font-size: 1em;
+      height: 40px;
+      padding: 5px;
+      width: 100%;
+
+      i {
+        color: #58658c;
+      }
+
+      input {
+        background-color: var(--white);
+        width: 400px;
+        color: #58658c;
+        font-size: .9em;
+        margin-left: 10px;
+        border: none;
+        outline: none;
+
+        &::placeholder {
+          color: #58658c;
+        }
+
+      }
+
+    }
+
+    form {
+      margin: 10px 0px;
+
+      .label {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        input {
+          margin-bottom: 5px;
+          text-transform: uppercase;
+          width: 300px;
+          outline: none;
+          border: 1px solid #58658c70;
+          padding: 10px;
+          border-radius: 5px;
+        }
+      }
+
+      button {
+        margin-top: 10px;
+        padding: 10px;
+        justify-content: center;
+
+        h2 {
+          color: var(--white);
+        }
+
+        &:hover {
+          transform: scale(1.01);
+        }
+      }
+
+      .especificacao {
+        background-color: var(--white);
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+        border: 1px solid rgba(0, 0, 0, 0.238);
+        transition: .5s;
+        cursor: pointer;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+
+        &:hover {
+          box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.382);
+        }
+
+        .text {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+          font-size: .9em;
+
+          p {
+            color: var(--black);
+          }
+
+          h2 {
+            color: var(--primary);
+          }
+
+        }
+
+      }
+
+    }
+
+  }
+
+}

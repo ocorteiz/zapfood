@@ -1,0 +1,34 @@
+<app-header></app-header>
+
+<aside class="back">
+  <div>
+    <i class="bi bi-arrow-left-short" [routerLink]="['/', dynamicParam]"></i>
+    <p>CARRINHO</p>
+  </div>
+  <hr>
+</aside>
+
+<main class="carrinho" *ngIf="getCarrinho().itens.length > 0; else vazio">
+  <section>
+    <app-card-item [getItens]="getCarrinho().itens" (itemDeleted)="onItemDeleted()"></app-card-item>
+  </section>
+
+  <button class="adicionar" [routerLink]="['/', dynamicParam]">
+    <h2>ADICIONAR MAIS PRODUTOS</h2>
+  </button>
+
+  <button class="avancar" (click)="avancar()">
+    <h2>AVANÇAR</h2>
+    <h2>{{ getCarrinho().total | currency:'BRL':'symbol':'1.2-2' }}</h2>
+  </button>
+</main>
+
+<ng-template #vazio>
+  <main class="vazio">
+      <h1>CARRINHO VAZIO</h1>
+  </main>
+</ng-template>
+
+
+
+<app-footer></app-footer>

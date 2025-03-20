@@ -1,0 +1,258 @@
+:host {
+
+  h1,
+  h2,
+  h3,
+  p {
+    color: #58658c;
+    font-size: 1em;
+  }
+
+
+  div.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+    padding: 0% 30%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    div.conteudo {
+      background-color: white;
+      padding: 10px;
+      border-radius: 5px;
+      width: 400px;
+
+      aside {
+        div.title {
+          display: flex;
+          gap: 10px;
+          align-items: center;
+
+          i {
+            color: #58658c;
+            font-size: 1.5em;
+            cursor: pointer;
+          }
+        }
+      }
+
+      button {
+        justify-content: center;
+        padding: 10px;
+        transition: .3s;
+
+        h2 {
+          color: white;
+        }
+
+        &:hover {
+          transform: scale(1.01);
+        }
+      }
+    }
+  }
+
+  main {
+    margin-left: 60px;
+    width: calc(100vw - 80px);
+    padding: 30px 40px;
+
+    aside {
+
+      div {
+        display: flex;
+        justify-content: flex-start;
+        gap: 30px;
+
+        h2 {
+          cursor: pointer;
+          padding-bottom: 10px;
+
+          &.active {
+            color: var(--primary);
+            border-bottom: 4px solid var(--primary);
+          }
+        }
+      }
+
+      hr {
+        margin: 0px;
+        margin-bottom: 10px;
+        color: #58658c;
+      }
+
+    }
+
+
+    div.section {
+
+      .alert {
+        display: flex;
+        justify-content: center;
+        margin: 5px 0px;
+
+        h2 {
+          padding: 5px;
+          border-radius: 5px;
+          color: var(--white-010);
+          width: 50%;
+          text-align: center;
+        }
+
+      }
+
+      .alert-success {
+        h2 {
+          background-color: rgb(0, 187, 0);
+        }
+      }
+
+      .alert-error {
+        h2 {
+          background-color: red;
+        }
+      }
+
+      i.bi-exclamation-circle {
+        font-size: .7em;
+        color: red;
+        cursor: pointer;
+        position: relative;
+
+        .description {
+          position: absolute;
+          top: -50px;
+          left: 20px;
+
+          font-size: 1em;
+          background-color: white;
+          border: 1px solid rgba(0, 0, 0, 0.238);
+          padding: 5px;
+          border-radius: 5px;
+          width: 300px;
+          text-align: justify;
+          font-weight: 300;
+          display: none;
+        }
+
+        &:hover .description {
+          display: block;
+        }
+
+      }
+
+      div.cadastro {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        h2 {
+          cursor: pointer;
+          margin-left: 20px;
+        }
+
+        label {
+          background-color: var(--white);
+          cursor: context-menu;
+          display: flex;
+          align-items: center;
+          border: 1px solid #58658c;
+          border-radius: 40px;
+          font-size: 1em;
+          height: 40px;
+          padding: 10px;
+          width: 400px;
+
+          i {
+            color: #58658c;
+          }
+
+          input {
+            background-color: var(--white);
+            width: 400px;
+            color: #58658c;
+            font-size: .9em;
+            margin-left: 10px;
+            border: none;
+            outline: none;
+
+            &::placeholder {
+              color: #58658c;
+            }
+
+          }
+
+        }
+
+      }
+
+      app-card-produto {
+        margin-top: 10px;
+        display: grid;
+        gap: 20px;
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      app-card-adicional, app-card-especificacao {
+        margin-top: 10px;
+        display: grid;
+        gap: 20px;
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+    }
+
+    div.produtos {
+
+      div {
+        margin-bottom: 10px;
+      }
+
+    }
+
+    div.categorias {
+
+      div.categoria {
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        h3 {
+          font-weight: 300;
+          font-size: .8em;
+          color: black;
+        }
+
+        span {
+          color: red;
+          font-weight: 300;
+          cursor: pointer;
+          position: relative;
+        }
+
+      }
+
+    }
+
+    div.adicionais {
+
+      span {
+        color: red;
+        font-weight: 300;
+        cursor: pointer;
+      }
+
+    }
+
+
+  }
+
+}

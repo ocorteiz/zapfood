@@ -1,0 +1,40 @@
+<section class="form-endereco">
+  <aside class="back">
+    <div>
+      <i class="bi bi-arrow-left-short" (click)="closeModal()"></i>
+      <p>INFORME SEU ENDEREÇO</p>
+    </div>
+    <hr>
+  </aside>
+
+  <form (submit)="onSubmit()" #form="ngForm">
+    <div class="bairro">
+      <h2>BAIRRO</h2>
+      <select [(ngModel)]="endereco.idBairro" name="estado" id="estado" required>
+        <option value="" disabled selected>SELECIONE UM BAIRRO</option>
+        <option *ngFor="let bairro of getBairros()" [value]="bairro.id">{{ bairro.nome.toUpperCase() }}</option>>
+      </select>
+    </div>
+    <div class="rua">
+      <h2>RUA*</h2>
+      <input [(ngModel)]="endereco.rua" type="text" name="rua" id="rua" placeholder="EX: GETULIO VARGAS" required>
+    </div>
+    <div class="numero">
+      <h2>NUMERO*</h2>
+      <input [(ngModel)]="endereco.numero" type="number" min="0" name="numero" id="numero" placeholder="EX: 56" required>
+    </div>
+    <div class="complemento">
+      <h2>COMPLEMENTO</h2>
+      <input [(ngModel)]="endereco.complemento" type="text" name="complemento" id="complemento" placeholder="EX: AO LADO IGREJA CATATOLICA" required="">
+    </div>
+
+    <div *ngIf="erro" class="erro">
+      <p>{{ erro }}</p>
+    </div>
+
+    <button type="submit">
+      <h2>CADASTRAR</h2>
+    </button>
+  </form>
+
+</section>

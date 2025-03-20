@@ -1,0 +1,8 @@
+<div class="card" *ngFor="let pedido of getUltimosPedidos" (click)="createOrderFromLast(pedido.id)">
+  <img *ngIf="pedido.itens.length > 0" [src]="getImageUrl(pedido.itens[0].imagem)" alt="">
+  <div class="text">
+    <h2 class="itens" >
+      {{ getConcatenatedItems(pedido, 15) }}
+    </h2>
+  </div>
+</div>

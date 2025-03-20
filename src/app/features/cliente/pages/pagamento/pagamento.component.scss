@@ -1,0 +1,164 @@
+:host {
+
+  h1,
+  h2,
+  h3,
+  p {
+    color: var(--black);
+  }
+
+  main {
+    padding: 0% 30%;
+    padding-bottom: 66px;
+
+    aside {
+
+      div {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        justify-content: left;
+        gap: 20px;
+      }
+
+      i {
+        font-size: 2em;
+        cursor: pointer;
+      }
+
+      hr {
+        margin: 0;
+      }
+    }
+
+    section.conteudo {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      div.pagamento {
+        width: 100%;
+
+        h2.pagamento {
+          text-align: center;
+          width: 100%;
+          background-color: green;
+          color: white;
+          padding: 10px 5px;
+          border-radius: 5px;
+          margin: 5px 0px;
+        }
+
+      }
+
+      div.alert {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+
+        h2 {
+          padding: 5px;
+          border-radius: 5px;
+          color: var(--white-010);
+          width: 100%;
+          text-align: center;
+        }
+
+      }
+
+      div.alert-success {
+        h2 {
+          background-color: rgb(255, 0, 0);
+        }
+      }
+
+      div.title {
+        h2 {
+          text-align: center;
+          margin-bottom: 10px;
+        }
+      }
+
+      div.tempo {
+        display: flex;
+        justify-content: center;
+
+        h2.contador {
+          color: var(--primary);
+          width: 50px;
+          border-radius: 5px;
+          border: 1px solid var(--primary);
+          padding: 0px 5px;
+          margin-right: 5px;
+        }
+      }
+
+      a {
+        width: 100%;
+        padding: 10px;
+        background-color: var(--primary);
+        padding: 15px;
+        text-align: center;
+        border-radius: 5px;
+
+        h2 {
+          color: white;
+        }
+
+      }
+
+      div.code {
+        margin-top: 10px;
+        width: 100%;
+
+        h2.message {
+          color: var(--primary);
+          text-align: center;
+          margin-bottom: 5px;
+        }
+
+        h2.code {
+          border: 1px solid var(--primary);
+          padding: 10px;
+          border-radius: 5px 5px 0px 0px;
+        }
+
+        h2 {
+          font-size: .7em;
+          text-align: justify;
+        }
+
+        button {
+          border: 1px solid var(--primary);
+          padding: 15px;
+          justify-content: center;
+
+          h2 {
+            font-size: 1em;
+            color: white;
+          }
+        }
+
+      }
+
+      img {
+        width: 100%;
+      }
+    }
+
+  }
+
+  @media screen and (max-width: 576px) {
+    main {
+      padding: 0% 5%;
+      padding-bottom: 66px;
+
+      section.conteudo {
+        img {
+          width: 300px;
+        }
+      }
+    }
+  }
+}

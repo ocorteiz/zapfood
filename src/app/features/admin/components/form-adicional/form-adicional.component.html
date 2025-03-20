@@ -1,0 +1,76 @@
+<section *ngIf="mode === 'add'" class="form-adicional">
+  <aside class="back">
+    <div>
+      <i class="bi bi-arrow-left-short" (click)="closeModal()"></i>
+      <p>CADASTRAR ADICIONAL</p>
+    </div>
+    <hr>
+  </aside>
+
+  <form (ngSubmit)="onSubmitCadastro()" [formGroup]="adicionalForm">
+
+    <label for="nome-input" class="nome label">
+      <h2>NOME: </h2>
+      <input id="nome-input" class="nome-input" type="text" formControlName="nome" name="nome" placeholder="EX: BACON" required>
+    </label>
+
+    <label for="descricao-input" class="descricao label">
+      <h2>DESCRIÇÃO: </h2>
+      <input id="descricao-input" class="descricao-input" type="text" formControlName="descricao" name="descricao" placeholder="EX: APROXIMADAMENTE 150g" required>
+    </label>
+
+    <label for="preco-input" class="preco label">
+      <h2>PREÇO: </h2>
+      <input id="preco-input" class="preco-input" type="number" min="1" formControlName="preco" name="preco" placeholder="EX: 5.00" required>
+    </label>
+
+    <label for="categoria-input" class="preco label">
+      <h2>CATEGORIA: </h2>
+      <select name="categoria-input" id="categoria-input" formControlName="idCategoria" required>
+        <option disabled selected>SELECIONE UMA CATEGORIA</option>
+        <option *ngFor="let categoria of getCategorias()" [ngValue]="categoria.id">{{ categoria.nome.toUpperCase() }}</option>
+      </select>
+    </label>
+
+    <div class="erros">
+      <h2>{{erro.toUpperCase()}}</h2>
+    </div>
+
+    <button type="submit">
+      <h2>CADASTRAR</h2>
+    </button>
+
+  </form>
+</section>
+
+<section *ngIf="mode === 'update'" class="form-adicional" >
+  <aside class="back">
+    <div>
+      <i class="bi bi-arrow-left-short" (click)="closeModal()"></i>
+      <p>ATUALIZAR ADICIONAL</p>
+    </div>
+    <hr>
+  </aside>
+
+  <form (ngSubmit)="onSubmitUpdate()" *ngIf="getAdicional() as adicional">
+
+    <label for="descricao-input" class="descricao label">
+      <h2>DESCRIÇÃO: </h2>
+      <input id="descricao-input" class="descricao-input" type="text" placeholder="EX: APROXIMADAMENTE 150g" [(ngModel)]="adicional.descricao" name="descricao" required>
+    </label>
+
+    <label for="preco-input" class="preco label">
+      <h2>PREÇO: </h2>
+      <input id="preco-input" class="preco-input" type="number" min="1" placeholder="EX: 5.00" [(ngModel)]="adicional.preco" name="preco" required>
+    </label>
+
+    <div class="erros">
+      <p>{{erro.toUpperCase()}}</p>
+    </div>
+
+    <button type="submit">
+      <h2>ATUALIZAR</h2>
+    </button>
+
+  </form>
+</section>

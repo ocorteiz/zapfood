@@ -1,0 +1,58 @@
+<div *ngIf="showAddProduto" class="overlay">
+  <app-form-produto *ngIf="showAddProduto" [mode]="mode" [id]="id" (close)="toggleProduto()"
+    (messageEvent)="receberMensagem($event)"></app-form-produto>
+</div>
+
+<div *ngIf="showAdicional" class="overlay">
+  <app-container-adicionais *ngIf="showAdicional"
+    (close)="toggleAddAdicional(null)" (messageEvent)="receberMensagem($event)" [mode]="mode" [idProduto]="id"></app-container-adicionais>
+</div>
+
+<div *ngIf="showEspecificacao" class="overlay">
+  <app-container-especificacao *ngIf="showEspecificacao"
+    (close)="toggleAddEspecificacao(null)" (messageEvent)="receberMensagem($event)" [mode]="mode" [idProduto]="id"></app-container-especificacao>
+</div>
+
+
+<div *ngIf="showDeleteProduto" class="overlay">
+  <div class="conteudo">
+    <aside>
+      <div class="title">
+        <i class="bi bi-arrow-left-short" (click)="toggleDeleteProduto(null)"></i>
+        <p>ATENÇÃO</p>
+      </div>
+      <hr>
+    </aside>
+
+    <p class="description">AO DELETAR PRODUTO, TODOS OS DADOS DE <strong>PEDIDOS</strong> VINCULADO A ESSE SERÃO PERDIDOS </p>
+    <hr>
+    <button (click)="deletarProduto(idDelete)">
+      <h2>DELETAR</h2>
+    </button>
+  </div>
+</div>
+
+<div *ngFor="let produto of getProdutos" class="card" [class.desativado]="produto.status === false">
+  <div class="info">
+    <div class="text">
+      <h2>{{ produto.nome.toUpperCase() }}</h2>
+      <p>{{ produto.descricao.toUpperCase()}}</p>
+      <h2>{{ produto.preco | currency:'BRL':'symbol':'1.2-2'}}</h2>
+    </div>
+    <img [src]="getImageUrl(produto.imagem)" alt="Imagem de {{produto.nome}}">
+  </div>
+  <div class="edit">
+    <h2 class="delete" (click)="toggleDeleteProduto(produto.id)">DELETAR</h2>
+    <h2 *ngIf="produto.status" class="desative" (click)="desativarProduto(produto.id)">DESATIVAR</h2>
+    <h2 *ngIf="!produto.status" class="ative" (click)="ativarProduto(produto.id)">ATIVAR</h2>
+    <h2 class="update" (click)="toggleUpdateProduto(produto.id)">ATUALIZAR</h2>
+  </div>
+  <div class="edit" >
+    <h2 class="plus" (click)="toggleAddAdicional(produto.id)">ADICIONAR ADICIONAL</h2>
+    <h2 class="plus" (click)="toggleRemoveAdicional(produto.id)">REMOVER ADICIONAL</h2>
+  </div>
+  <div class="edit">
+    <h2 class="plus" (click)="toggleAddEspecificacao(produto.id)">ADICIONAR ESPECIFICAÇÕES</h2>
+    <h2 class="plus" (click)="toggleRemoveEspecificacao(produto.id)">REMOVER ESPECIFICAÇÕES</h2>
+  </div>
+</div>

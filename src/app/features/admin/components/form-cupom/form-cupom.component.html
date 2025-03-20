@@ -1,0 +1,59 @@
+<section class="form-cupom">
+  <aside class="back">
+    <div>
+      <i class="bi bi-arrow-left-short" (click)="closeModal()"></i>
+      <p>CADASTRAR CUPOM</p>
+    </div>
+    <hr>
+  </aside>
+
+  <form (ngSubmit)="onSubmit()" [formGroup]="cupomForm">
+
+    <label for="nome-input" class="nome label">
+      <h2>NOME: </h2>
+      <input id="nome-input" class="nome-input" type="text" placeholder="EX: SEXTOU" formControlName="nome" name="nome" required>
+    </label>
+
+    <label for="descricao-input" class="descricao label">
+      <h2>DESCRIÇÃO: </h2>
+      <input id="descricao-input" class="descricao-input" type="text" placeholder="EX: R$5.00 DE DESCONTO PARA PEDIDO ACIMA DE R$10.00" formControlName="descricao" name="descricao" required>
+    </label>
+
+    <label for="valor-input" class="valor label">
+      <h2>VALOR DE CUPOM: </h2>
+      <input id="valor-input" class="valor-input" type="number" min="1" placeholder="EX: R$5.00" formControlName="valor" name="valor" required>
+    </label>
+
+    <label for="valorparapedido-input" class="valorparapedido label">
+      <h2>VALOR PARA PEDIDO: </h2>
+      <input id="valorparapedido-input" class="valorparapedido-input" min="1
+      " type="number" placeholder="EX: R$20.00" formControlName="valorParaPedido" name="valorParaPedido" required>
+    </label>
+
+    <label for="resgatavel-input" class="resgatavel label">
+      <h2>TIPO DE CUPOM: </h2>
+      <label >
+        <input  type="radio" formControlName="resgatavel" [value]="true" required>
+        RESGATAVEL
+      </label>
+      <label >
+        <input type="radio" formControlName="resgatavel" [value]="false" required>
+        NÃO RESGATAVEL
+      </label>
+    </label>
+
+    <label for="data-input" class="data label">
+      <h2>DATA DE VALIDADE: </h2>
+      <input id="data-input" class="data-input" type="date" formControlName="dataDeValidade" name="dataDeValidade" required>
+    </label>
+
+    <div class="erros">
+      <p>{{erro.toUpperCase()}}</p>
+    </div>
+
+    <button type="submit">
+      <h2>CADASTRAR</h2>
+    </button>
+
+  </form>
+</section>

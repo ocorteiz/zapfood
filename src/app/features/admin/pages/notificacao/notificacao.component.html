@@ -1,0 +1,77 @@
+<app-header></app-header>
+
+<div class="loading-overlay" *ngIf="isLoading">
+  <div class="spinner"></div>
+</div>
+
+<main>
+  <aside class="menu-status">
+    <div>
+      <h2 class="item-status active" (click)="selectStatus('NOTIFICAÇÃO', $event)">
+        NOTIFICAÇÃO
+      </h2>
+      <h2 class="item-status" (click)="selectStatus('ATIVAR NOTIFICAÇÕES', $event)">
+        ATIVAR NOTIFICAÇÕES
+      </h2>
+    </div>
+    <hr>
+  </aside>
+
+  <section class="conteudo" *ngIf="pagina == 'NOTIFICAÇÃO'">
+
+    <div *ngIf="messageSucess" class="alert alert-success">
+      <h2>{{messageSucess.toUpperCase()}}</h2>
+    </div>
+
+    <div *ngIf="messageError" class="alert alert-error">
+      <h2>{{messageError.toUpperCase()}}</h2>
+    </div>
+
+    <form (ngSubmit)="onSubmitNotificacao()" [formGroup]="notificacaoForm" class="notificacao">
+      <label for="titulo-input" class="titulo label">
+        <h2>TITULO: </h2>
+        <input id="titulo-input" class="titulo-input" type="text" placeholder="EX: SEXTA DO COMBO" formControlName="titulo" name="titulo" required>
+      </label>
+
+      <label for="paragrafo_1-input" class="paragrafo_1 label">
+        <h2>1º PARAGRAFO: </h2>
+        <input id="paragrafo_1-input" class="paragrafo1-input" type="text" placeholder="EX: X-BACON + 1 COCA LATA 220ML, COM 30% DE DESCONTO" formControlName="paragrafo_1" name="paragrafo_1" required>
+      </label>
+
+      <label for="paragrafo_2-input" class="paragrafo_2 label">
+        <h2>2º PARAGRAFO: </h2>
+        <input id="paragrafo_2-input" class="paragrafo_2-input" type="text" placeholder="EX: ACESSE NOSSO SITE E FAÇA SEU PEDIDO" formControlName="paragrafo_2" name="paragrafo_2" required>
+      </label>
+
+      <div *ngIf="erro" class="erro">
+        <p>{{erro.toUpperCase()}}</p>
+      </div>
+
+      <button type="submit">
+        <h2>ENVIAR</h2>
+      </button>
+
+    </form>
+
+  </section>
+
+  <section class="conteudo ativar" *ngIf="pagina == 'ATIVAR NOTIFICAÇÕES'">
+
+    <div *ngIf="messageSucess" class="alert alert-success">
+      <h2>{{messageSucess.toUpperCase()}}</h2>
+    </div>
+
+    <div *ngIf="messageError" class="alert alert-error">
+      <h2>{{messageError.toUpperCase()}}</h2>
+    </div>
+
+    <button (click)="conectarInstancia()">
+      <h2>CONECTAR WHATSAPP</h2>
+    </button>
+
+    <img [src]="getImageUrl(getBase64()?.base64)" *ngIf="getBase64()" alt="QR Code" />
+
+  </section>
+
+
+</main>

@@ -1,0 +1,95 @@
+:host {
+
+
+  h1,
+  h2 {
+    color: #58658c;
+  }
+
+  main {
+    margin-left: 60px;
+    width: calc(100vw - 80px);
+    padding: 30px 40px;
+
+    aside {
+
+      div {
+        display: flex;
+        justify-content: space-between;
+
+        h2 {
+          cursor: pointer;
+          padding-bottom: 10px;
+
+          &.active {
+            color: var(--primary);
+            border-bottom: 4px solid var(--primary);
+          }
+        }
+      }
+
+      hr {
+        margin: 0px;
+        margin-bottom: 10px;
+        color: #58658c;
+      }
+
+    }
+
+    section.conteudo {
+
+      div.pedidos {
+        margin-top: 10px;
+
+        label {
+          background-color: var(--white);
+          cursor: context-menu;
+          display: flex;
+          align-items: center;
+          border: 1px solid #58658c;
+          border-radius: 40px;
+          font-size: 1em;
+          height: 40px;
+          padding: 10px;
+          width: 400px;
+          margin-bottom: 10px;
+
+          i {
+            color: #58658c;
+          }
+
+          input {
+            background-color: var(--white);
+            width: 400px;
+            color: #58658c;
+            font-size: .9em;
+            margin-left: 10px;
+            border: none;
+            outline: none;
+
+            &::placeholder {
+              color: #58658c;
+            }
+
+          }
+
+        }
+
+        app-card-pedido {
+          display: grid;
+          gap: 20px;
+          grid-template-columns: repeat(4, 1fr);
+        }
+
+        hr {
+          color: #58658c;
+        }
+
+      }
+
+    }
+
+
+  }
+
+}

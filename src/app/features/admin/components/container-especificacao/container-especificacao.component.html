@@ -1,0 +1,51 @@
+<section class="container-especificacoes" *ngIf="mode == 'add'">
+  <aside class="back">
+    <div>
+      <i class="bi bi-arrow-left-short" (click)="closeModal()"></i>
+      <p>ADICIONAR ESPECIFICAÇÃO</p>
+    </div>
+    <hr>
+  </aside>
+
+  <label class="search">
+    <i class="bi bi-search"></i>
+    <input type="text" placeholder="PROCURE POR ESPECIFICAÇÃO" [(ngModel)]="searchText" name="search">
+  </label>
+
+  <form class="especificacoes">
+
+    <div *ngFor="let especificacao of filteredEspecificacao" class="especificacao" (click)="addEspecificacao(especificacao.id, idProduto)">
+      <div class="text">
+          <h2>{{ especificacao.nome.toUpperCase() }}</h2>
+          <p>{{ especificacao.descricao.toUpperCase() }}</p>
+      </div>
+    </div>
+
+  </form>
+</section>
+
+<section  class="container-especificacoes" *ngIf="mode == 'remove'">
+  <aside class="back">
+    <div>
+      <i class="bi bi-arrow-left-short" (click)="closeModal()"></i>
+      <p>REMOVER ESPECIFICAÇÃO</p>
+    </div>
+    <hr>
+  </aside>
+
+  <label class="search">
+    <i class="bi bi-search"></i>
+    <input type="text" placeholder="PROCURE POR ESPECIFICAÇÃO" [(ngModel)]="searchText" name="search">
+  </label>
+
+  <form class="especificacoes">
+
+    <div *ngFor="let especificacao of filteredEspecificacao" class="especificacao" (click)="removerEspecificacao(especificacao.id, idProduto)">
+      <div class="text">
+          <h2>{{ especificacao.nome.toUpperCase() }}</h2>
+          <p>{{ especificacao.descricao.toUpperCase() }}</p>
+      </div>
+    </div>
+
+  </form>
+</section>

@@ -1,0 +1,49 @@
+<div *ngFor="let pedido of pedidos" class="pedido" [routerLink]="['/admin/pedido', pedido.id, 'detalhes']">
+  <div class="cliente">
+    <h2>CLIENTE: <span>{{ pedido.nomeCliente?.toUpperCase()}} </span> </h2>
+    <h2 class="num-pedido">#{{ pedido.id  }}</h2>
+  </div>
+
+  <div class="hr"></div>
+
+  <div class="itens">
+    <h2>ITENS: </h2>
+    <h2 class="item" *ngFor="let item of pedido.itens">
+      <span>{{item.quantidade}}X - {{ item.nome.toUpperCase()}}</span>
+      <span *ngIf="item.adicionais?.length" > | ({{getConcateAdicional(item)}})</span>
+      <span *ngIf="item.especificacoes?.length"> | ({{getConcateEspecificacao(item)}})</span>
+    </h2>
+  </div>
+
+  <div class="endereco">
+    <h2>ENDEREÇO: </h2>
+    <h2>
+      <span> BAIRRO {{ pedido.endereco?.bairro?.toUpperCase() }}, RUA {{
+        pedido.endereco?.rua?.toUpperCase()
+        }}, Nº{{ pedido.endereco?.numero }}
+        <span *ngIf="pedido.endereco?.complemento">, {{
+          pedido.endereco?.complemento?.toUpperCase() }} </span>
+      </span>
+    </h2>
+  </div>
+
+  <div class="hr"></div>
+
+  <div *ngIf="pedido.status === 'AGUARDANDO ACEITACAO'" class="btns">
+    <button (click)="aceitarPedido(pedido.id)" >
+      <h2>ACEITAR</h2>
+    </button>
+  </div>
+
+  <div *ngIf="pedido.status === 'EM PREPARO'" class="btns">
+    <button (click)="enviarPedido(pedido.id)">
+      <h2>ENVIAR</h2>
+    </button>
+  </div>
+
+  <div *ngIf="pedido.status === 'A CAMINHO'" class="btns">
+    <button (click)="finalizarPedido(pedido.id)">
+      <h2>FINALIZAR</h2>
+    </button>
+  </div>
+</div>

@@ -1,0 +1,81 @@
+<section class="container-clientes">
+  <aside class="back">
+    <div>
+      <i class="bi bi-arrow-left-short" (click)="closeModal()"></i>
+      <p>CLIENTES</p>
+    </div>
+    <hr>
+  </aside>
+
+  <label class="search">
+    <i class="bi bi-search"></i>
+    <input type="text" placeholder="PROCURE POR CLIENTES" [(ngModel)]="searchText" name="search">
+  </label>
+
+  <form class="clientes" *ngIf="mode == 'add'" (ngSubmit)="onSubmitAdicionar()">
+
+    <div *ngIf="getClientesWhitoutCupom().length > 0" class="all">
+      <input class="all" type="checkbox" [(ngModel)]="selectAll" name="selectAll" (change)="selectAllClientesWhitoutCupom()" /> SELECIONAR TODOS
+    </div>
+
+    <div class="cliente" *ngFor="let cliente of filteredClientesWhitouCupomFiltrados; let i = index">
+      <div class="text">
+        <h2>{{ cliente.nome.toUpperCase() }}</h2>
+        <p>ULTIMO PEDIDO:
+          <span class="itens" *ngFor="let item of cliente.ultimoPedido;  let last = last">
+            {{ item.nome.toUpperCase() }}
+            <span *ngIf="!last"> + </span>
+          </span>
+        </p>
+        <p>ULTIMO ENDEREÇO:
+          <span *ngIf="cliente.ultimoEndereco">
+            {{cliente.ultimoEndereco.bairro.toUpperCase() }}, {{cliente.ultimoEndereco.rua.toUpperCase()}},
+            {{cliente.ultimoEndereco.numero}} <span *ngIf="cliente.ultimoEndereco.complemento">{{', ' +
+              cliente.ultimoEndereco.complemento.toUpperCase() }}</span>
+          </span>
+        </p>
+      </div>
+      <input class="checkbox" type="checkbox" [id]="'checkbox' + i" [(ngModel)]="selecoesAdd[cliente.id]" name="checkbox{{i}}">
+      <label [for]="'checkbox' + i"></label>
+    </div>
+
+    <button type="submit">
+      <h2>ADICIONAR</h2>
+    </button>
+
+  </form>
+
+  <form class="clientes" *ngIf="mode == 'remove'" (ngSubmit)="onSubmitRemove()">
+
+    <div *ngIf="getClientesByCUpom().length > 0" class="all">
+      <input class="all" type="checkbox" [(ngModel)]="selectAll" name="selectAll" (change)="selectAllClientesByCupom()" /> SELECIONAR TODOS
+    </div>
+
+    <div class="cliente" *ngFor="let cliente of filteredClientesByCupomFiltrados; let i = index">
+      <div class="text">
+        <h2>{{ cliente.nome.toUpperCase() }}</h2>
+        <p>ULTIMO PEDIDO:
+          <span class="itens" *ngFor="let item of cliente.ultimoPedido;  let last = last">
+            {{ item.nome.toUpperCase() }}
+            <span *ngIf="!last"> + </span>
+          </span>
+        </p>
+        <p>ULTIMO ENDEREÇO:
+          <span *ngIf="cliente.ultimoEndereco">
+            {{cliente.ultimoEndereco.bairro.toUpperCase() }}, {{cliente.ultimoEndereco.rua.toUpperCase()}},
+            {{cliente.ultimoEndereco.numero}} <span *ngIf="cliente.ultimoEndereco.complemento">{{', ' +
+              cliente.ultimoEndereco.complemento.toUpperCase() }}</span>
+          </span>
+        </p>
+      </div>
+      <input class="checkbox" type="checkbox" [id]="'checkbox' + i" [(ngModel)]="selecoesRemove[cliente.id]" name="checkbox{{i}}">
+      <label [for]="'checkbox' + i"></label>
+    </div>
+
+    <button type="submit">
+      <h2>REMOVER</h2>
+    </button>
+
+  </form>
+
+</section>

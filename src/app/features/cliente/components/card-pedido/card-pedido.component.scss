@@ -1,0 +1,65 @@
+:host {
+
+  h2, p {
+    color: var(--black);
+  }
+
+  div.pedido {
+    background-color: var(--white);
+    border: 1px solid rgba(0, 0, 0, 0.238);
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+
+    div {
+      display: flex;
+      justify-content: space-between;
+
+      h2.status {
+        font-size: .7em;
+        border: 1px solid var(--primary);
+        color: var(--primary);
+        padding: 2px 4px;
+        border-radius: 5px;
+      }
+    }
+
+    p {
+      font-size: .8em;
+    }
+
+    button {
+      background-color: var(--white);
+      border: 1px solid var(--primary);
+      padding: 5px;
+      width: 100%;
+      justify-content: center;
+
+      h2 {
+        color: var(--primary);
+      }
+    }
+
+    button.detalhes {
+      margin-top:5px;
+    }
+
+    button.cancelar {
+      background-color: red;
+      border: none;
+      margin-top: 5px;
+
+      h2 {
+        color: var(--white);
+      }
+
+    }
+
+  }
+
+  h2.pagamento {
+    border: 1px solid black !important;
+    color: black !important;
+  }
+
+}

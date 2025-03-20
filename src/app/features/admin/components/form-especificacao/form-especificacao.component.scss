@@ -1,0 +1,88 @@
+:host {
+
+  h1,
+  h2,
+  p {
+    color: #58658c;
+    font-size: 1em;
+  }
+
+  .form-adicional {
+    background-color: var(--white-010);
+    border-radius: 10px;
+    padding: 10px 20px;
+
+    aside {
+      width: 100%;
+
+      i {
+        cursor: pointer;
+        font-size: 2em;
+        color: #58658c;
+      }
+
+      div {
+        display: flex;
+        align-items: center;
+      }
+
+      hr {
+        margin: 0px;
+      }
+    }
+
+    form {
+      margin: 20px 0px;
+
+      .label {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        input,
+        select {
+          margin-bottom: 5px;
+          text-transform: uppercase;
+          width: 300px;
+          outline: none;
+          border: 1px solid #58658c70;
+          padding: 10px;
+          border-radius: 5px;
+
+          .option {
+            background-color: rebeccapurple;
+          }
+        }
+
+        .preco-input {
+          width: 150px;
+        }
+      }
+
+      div.erros {
+        p {
+          color: red;
+          width: 100%;
+          text-align: center;
+        }
+      }
+
+      button {
+        margin-top: 10px;
+        padding: 10px;
+        justify-content: center;
+
+        h2 {
+          color: var(--white);
+        }
+
+        &:hover {
+          transform: scale(1.01);
+        }
+      }
+
+    }
+
+  }
+
+}

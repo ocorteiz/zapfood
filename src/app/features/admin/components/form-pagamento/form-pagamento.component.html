@@ -1,0 +1,26 @@
+<section class="form-pagamento">
+  <aside class="back">
+    <div>
+      <i class="bi bi-arrow-left-short" (click)="closeModal()"></i>
+      <p>CADASTRAR FORMA DE PAGAMENTO</p>
+    </div>
+    <hr>
+  </aside>
+
+  <form (ngSubmit)="onSubmit()" [formGroup]="pagamentoForm">
+
+    <label for="nome-input" class="nome label">
+      <h2>NOME: </h2>
+      <input id="nome-input" class="nome-input" type="text" formControlName="nome" name="nome" placeholder="EX: PAGAMENTO VIA CARTÃO DE DEBITO NA ENTREGA">
+    </label>
+
+    <div class="erros" *ngIf="erro">
+      <p *ngIf="erro">{{erro}}</p>
+    </div>
+
+    <button type="submit">
+      <h2>CADASTRAR</h2>
+    </button>
+
+  </form>
+</section>

@@ -1,0 +1,5 @@
+<div class="card" [routerLink]="['/produto', getPromocao[0].id]" >
+  <img [src]="getImageUrl(getPromocao[0].imagem)" alt="Promotion Image">
+  <h1>{{ getPromocao[0].nome.toUpperCase() }}</h1>
+  <h2>{{ getPromocao[0].preco | currency:'BRL':'symbol':'1.2-2' }}</h2>
+</div>

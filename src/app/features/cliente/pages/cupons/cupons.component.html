@@ -1,0 +1,27 @@
+<app-header></app-header>
+<main>
+  <aside class="back">
+    <div>
+      <i class="bi bi-arrow-left-short" [routerLink]="['/', dynamicParam, 'perfil']"></i>
+      <p>MEUS CUPONS</p>
+    </div>
+    <hr>
+  </aside>
+  <section class="cupons">
+    <div *ngIf="messageSucess" class="alert alert-success">
+      <h2>{{messageSucess.toUpperCase()}}</h2>
+    </div>
+
+    <div *ngIf="messageErro" class="alert alert-error">
+      <h2>{{messageErro.toUpperCase()}}</h2>
+    </div>
+
+    <label for="codigo-input" class="codigo label">
+      <input id="codigo-input" class="codigo-input" type="text" placeholder="EX: CUPOMSEXTOU25" [(ngModel)]="codigo"  required>
+      <h2 (click)="resgate()">RESGATAR CUPOM </h2>
+    </label>
+    <app-card-cupom [getCupons]="getCupons()">
+    </app-card-cupom>
+  </section>
+</main>
+<app-footer></app-footer>

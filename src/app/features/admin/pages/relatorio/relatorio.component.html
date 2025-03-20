@@ -1,0 +1,68 @@
+<app-header></app-header>
+
+<main>
+  <aside class="menu-status">
+    <h1 class="item-status">
+      INFORMAÇÕES
+    </h1>
+    <hr>
+  </aside>
+
+  <section class="conteudo">
+
+    <div class="numeros">
+
+      <div *ngFor="let data of getResumoPedidos(); let i = index" [ngClass]="'div' + (i + 1)">
+        <h2>{{ data.name.toUpperCase() }}</h2>
+        <h2 *ngIf="i !== 1 && i !== 2 && i !== 5 && i !== 7; else noCurrency">
+          {{ data.value | currency:'BRL':'symbol':'1.2-2' }}
+        </h2>
+        <ng-template #noCurrency>
+          <h2>{{ data.value | number:'1.0-0' }}</h2>
+        </ng-template>
+      </div>
+
+    </div>
+
+    <div class="graficos">
+
+      <div *ngIf="isBrowser" class="bairro">
+        <h2>PEDIDOS POR BAIRRO:</h2>
+        <div echarts [options]="pedidosPorBairro" class="canvas"></div>
+      </div>
+
+      <div *ngIf="isBrowser" class="pagamento">
+        <h2>PEDIDOS POR METÓDO DE PAGAMENTO:</h2>
+        <div echarts [options]="pedidosPorPagamento" class="canvas"></div>
+      </div>
+
+      <div class="produtos">
+
+        <div class="mais-menos">
+          <div *ngIf="isBrowser" class="mais-vendido">
+            <h2>PRODUTOS MAIS VENDIDOS:</h2>
+            <div echarts [options]="produtosMaisVendidos" class="canvas"></div>
+          </div>
+
+          <div *ngIf="isBrowser" class="menos-vendido">
+            <h2>PRODUTOS MENOS VENDIDOS:</h2>
+            <div echarts [options]="produtosMenosVendidos" class="canvas"></div>
+          </div>
+        </div>
+
+        <div *ngIf="isBrowser" class="nunca-vendidos">
+
+          <h2>PRODUTOS NÃO VENDIDOS:</h2>
+          <ul *ngFor="let item of getProdutosNaoVendidos()">
+            <li>{{item.nome.toUpperCase()}}</li>
+          </ul>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+  </section>
+</main>

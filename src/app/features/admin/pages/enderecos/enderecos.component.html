@@ -1,0 +1,90 @@
+<app-header></app-header>
+
+<div *ngIf="showAddEndereco" class="overlay">
+  <app-form-endereco [idBairro]="idBairro" [mode]="mode" *ngIf="showAddEndereco"  (messageEvent)="receberMessagem($event)"  (close)="toggleAddEndereco()"></app-form-endereco>
+</div>
+
+<div *ngIf="showFreteGratis" class="overlay">
+  <div class="conteudo">
+    <aside>
+      <div class="title">
+        <i class="bi bi-arrow-left-short" (click)="toggleFreteGratis()"></i>
+        <p>FRETE GRATIS</p>
+      </div>
+      <hr>
+    </aside>
+
+    <p class="description">CONFIRME ESTA OPÇÃO PARA LIBERAR FRETE GRATIS EM TODOS OS BAIRROS DE ENTREGA</p>
+    <hr>
+    <button (click)="freteGratis()">
+      <h2>CONFIRMAR</h2>
+    </button>
+  </div>
+</div>
+
+<main>
+  <aside class="menu-status">
+    <h1 class="item-status">
+      ENDEREÇOS
+    </h1>
+    <hr>
+  </aside>
+
+  <section class="conteudo">
+    <div class="cadastro search">
+      <label>
+        <i class="bi bi-search" ></i>
+        <input type="text" placeholder="PROCURE POR BAIRRO" [(ngModel)]="searchText">
+      </label>
+      <button (click)="toggleFreteGratis()" class="frete-gratis">
+        <h2>FRETE GRATIS</h2>
+      </button>
+      <h2 class="cadastro" (click)="toggleAddEndereco()">+ CADASTRAR BAIRRO DE ENTREGA</h2>
+    </div>
+
+    <section class="enderecos">
+
+      <div *ngIf="messageSucess" class="alert alert-success">
+        <h2>{{messageSucess.toUpperCase()}}</h2>
+      </div>
+
+      <div *ngIf="messageError" class="alert alert-error">
+        <h2>{{messageError.toUpperCase()}}</h2>
+      </div>
+
+      <div class="endereco" *ngFor="let bairro of filteredBairros">
+
+        <div *ngIf="showDelete" class="overlay">
+          <div class="conteudo">
+            <aside>
+              <div class="title">
+                <i class="bi bi-arrow-left-short" (click)="toggleDelete()"></i>
+                <p>ATENÇÃO</p>
+              </div>
+              <hr>
+            </aside>
+
+            <p class="description">AO DELETAR BAIRRO DE ENTREGA, TODOS OS DADOS DE <strong>PEDIDOS</strong> VINCULADO A ESSE SERÃO PERDIDOS</p>
+            <hr>
+            <button (click)="deleteBairro(bairro.id)">
+              <h2>DELETAR</h2>
+            </button>
+          </div>
+        </div>
+
+        <h2>{{bairro.nome.toUpperCase()}}:</h2>
+        <h3>TAXA DE ENTREGA: {{bairro.taxaDeEntrega | currency:'BRL':'symbol':'1.2-2'}} </h3>
+        <div class="btns">
+          <button (click)="toggleDelete()" class="delete">
+            <h2>DELETAR</h2>
+          </button>
+          <button (click)="toggleUpdateEndereco(bairro.id)" class="update">
+            <h2>ATUALIZAR</h2>
+          </button>
+        </div>
+      </div>
+
+    </section>
+
+  </section>
+</main>

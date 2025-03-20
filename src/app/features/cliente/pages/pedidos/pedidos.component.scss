@@ -1,0 +1,51 @@
+:host {
+
+  h1,
+  h2,
+  h3,
+  p {
+    color: var(--black);
+  }
+
+  main {
+    padding: 0% 30%;
+
+    aside {
+
+      div {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        justify-content: left;
+        gap: 20px;
+      }
+
+      i {
+        font-size: 2em;
+        cursor: pointer;
+      }
+
+      hr {
+        margin: 0;
+      }
+    }
+
+    section.pedidos {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding-top: 20px;
+      padding-bottom: 56px;
+    }
+
+  }
+
+  @media screen and (max-width: 576px) {
+
+    main {
+      padding: 0% 5%;
+    }
+
+  }
+
+}

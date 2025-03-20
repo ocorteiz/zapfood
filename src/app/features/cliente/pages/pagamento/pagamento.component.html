@@ -1,0 +1,45 @@
+<app-header></app-header>
+<main>
+  <aside class="back">
+    <div>
+      <i class="bi bi-arrow-left-short" [routerLink]="['/', dynamicParam, 'meus-pedidos']"></i>
+      <p>PAGAMENTO VIA PIX</p>
+    </div>
+    <hr>
+  </aside>
+  <section class="conteudo" *ngIf="getPedido() as pedido">
+
+    <div class="pagamento">
+      <h2 class="pagamento" *ngIf="notificacao">
+        {{ notificacao }}
+      </h2>
+    </div>
+
+    <div *ngIf="messageSucess" class="alert alert-success">
+      <h2>{{messageSucess.toUpperCase()}}</h2>
+    </div>
+
+    <div class="title">
+      <h2>PAGUE EM SEU APLICATIVO BANCARIO</h2>
+
+      <div class="tempo">
+        <h2>PAGUE EM ATÉ: &nbsp;</h2>
+        <h2 class="contador" [ngClass]="{'disabled': contador > 0}" [attr.disabled]="contador > 0 ? true : null"> {{
+          formatarTempo(contador) }}</h2>
+        <h2>MINUTOS</h2>
+      </div>
+
+    </div>
+
+    <img [src]="getImageUrl(pedido.pixQRCode)" alt="QR Code" />
+
+    <div class="code">
+      <h2 class="message" *ngIf="messageCopy">{{messageCopy}}</h2>
+      <h2 class="code" #contentToCopy>{{pedido.pixCode | slice:0:100}}...</h2>
+      <button (click)="copyToClipboard(pedido.pixCode)">
+        <h2>COPIAR CÓDIGO (PIX COPIA E COLA)</h2>
+      </button>
+    </div>
+  </section>
+</main>
+<app-footer></app-footer>

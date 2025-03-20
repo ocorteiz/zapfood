@@ -1,0 +1,39 @@
+<div *ngIf="showAddAdicional" class="overlay">
+  <app-form-adicional *ngIf="showAddAdicional" [mode]="'update'" [id]="adicional?.id" (close)="toggleUpdateAdicional()" (messageEvent)="receberMensagem($event)" ></app-form-adicional>
+</div>
+
+<!-- <div *ngIf="showContainerAdicionais" class="overlay">
+  <app-container-adicionais *ngIf="showContainerAdicionais" ></app-container-adicionais>
+</div> -->
+
+<div *ngIf="showDelete" class="overlay">
+  <div class="conteudo">
+    <aside>
+      <div class="title">
+        <i class="bi bi-arrow-left-short" (click)="toggleDelete(null)"></i>
+        <p>ATENÇÃO</p>
+      </div>
+      <hr>
+    </aside>
+
+    <p class="description">AO DELETAR ADICIONAL, TODOS OS DADOS DE <strong>PEDIDOS</strong> VINCULADO A ESSE SERÃO PERDIDOS</p>
+    <hr>
+    <button (click)="deletarAdicional(id)">
+      <h2>DELETAR</h2>
+    </button>
+  </div>
+</div>
+
+<div *ngFor="let adicional of getAdicionais" class="adicional" [class.desativado]="adicional.status === false">
+  <div class="text">
+      <h2>{{ adicional.nome.toUpperCase() }}</h2>
+      <p>{{ adicional.descricao.toUpperCase() }}</p>
+      <h2 class="preco">{{ adicional.preco | currency:'BRL':'symbol':'1.2-2' }}</h2>
+  </div>
+  <div class="edit">
+    <h2 class="delete" (click)="toggleDelete(adicional.id)">DELETAR</h2>
+    <h2 *ngIf="adicional.status" class="desative" (click)="desativarAdicional(adicional.id)">DESATIVAR</h2>
+    <h2 *ngIf="!adicional.status" class="ative" (click)="ativarAdicional(adicional.id)">ATIVAR</h2>
+    <h2 class="update" (click)="selectAdcionalToUpdate(adicional); toggleUpdateAdicional()">ATUALIZAR</h2>
+  </div>
+</div>

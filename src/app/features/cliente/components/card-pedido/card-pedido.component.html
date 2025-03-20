@@ -1,0 +1,12 @@
+<div class="pedido" *ngFor="let pedido of getPedido">
+  <div>
+    <h2>PEDIDO #{{ pedido.id }}</h2>
+    <h2 class="status" [class.pagamento]="pedido.status === 'AGUARDANDO PAGAMENTO'"> {{ pedido.status?.toUpperCase() }} </h2>
+  </div>
+  <p> {{ pedido.dataDeCriacao | date: 'dd/MM/yyyy HH:mm:ss' }} </p>
+  <p *ngFor="let item of pedido.itens" > {{ item.nome.toUpperCase() }} </p>
+  <h2>TOTAL: {{ pedido.total | currency:'BRL':'symbol':'1.2-2' }} </h2>
+  <button class="detalhes" (click)="redirectPage(pedido.status, pedido.id)">
+    <h2> DETALHES DO PEDIDO</h2>
+  </button>
+</div>

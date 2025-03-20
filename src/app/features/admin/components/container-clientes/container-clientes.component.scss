@@ -1,0 +1,166 @@
+:host {
+
+  h1,
+  h2,
+  p {
+    color: #58658c;
+    font-size: 1em;
+  }
+
+  .container-clientes {
+    overflow: auto;
+    max-height: 500px;
+    width: 500px;
+    background-color: var(--white-010);
+    border-radius: 10px;
+    padding: 10px 20px;
+
+    aside {
+      width: 100%;
+
+      i {
+        cursor: pointer;
+        font-size: 2em;
+        color: #58658c;
+      }
+
+      div {
+        display: flex;
+        align-items: center;
+      }
+
+      hr {
+        margin: 0px;
+      }
+    }
+
+    label.search {
+      margin-top: 10px;
+      background-color: var(--white);
+      cursor: context-menu;
+      display: flex;
+      align-items: center;
+      border: 1px solid #58658c;
+      border-radius: 40px;
+      font-size: 1em;
+      height: 40px;
+      padding: 5px;
+      width: 100%;
+
+      i {
+        color: #58658c;
+      }
+
+      input {
+        background-color: var(--white);
+        width: 400px;
+        color: #58658c;
+        font-size: .9em;
+        margin-left: 10px;
+        border: none;
+        outline: none;
+
+        &::placeholder {
+          color: #58658c;
+        }
+
+      }
+
+    }
+
+    form {
+      margin: 10px 0px;
+
+      .all {
+        margin-bottom: 10px;
+
+        input {
+          border-radius: 50%;
+        }
+      }
+
+      .label {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        input {
+          margin-bottom: 5px;
+          text-transform: uppercase;
+          width: 300px;
+          outline: none;
+          border: 1px solid #58658c70;
+          padding: 10px;
+          border-radius: 5px;
+        }
+      }
+
+      button {
+        margin-top: 10px;
+        padding: 10px;
+        justify-content: center;
+
+        h2 {
+          color: var(--white);
+        }
+
+        &:hover {
+          transform: scale(1.01);
+        }
+      }
+
+      div.cliente {
+        background-color: white;
+        border-radius: 5px;
+        margin-bottom: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px;
+
+        .text {
+
+          h2 {
+            font-size: 1em;
+          }
+
+          h2,
+          p {
+            color: black;
+          }
+
+          .itens {
+            color: var(--primary);
+          }
+
+          p {
+            font-size: .8em;
+          }
+
+        }
+
+        .checkbox {
+          display: none;
+        }
+
+        label {
+          width: 20px;
+          height: 20px;
+          border: 1px solid gray;
+          border-radius: 50%;
+          display: inline-block;
+          position: relative;
+          cursor: pointer;
+        }
+
+        .checkbox:checked+label {
+          background-color: green;
+        }
+
+      }
+
+    }
+
+  }
+
+}

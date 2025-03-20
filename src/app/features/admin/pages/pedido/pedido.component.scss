@@ -1,0 +1,238 @@
+:host {
+
+  h1,
+  h2,
+  p,
+  hr {
+    color: #58658c;
+    font-size: 1em;
+  }
+
+  i {
+    cursor: pointer;
+    font-size: 1.5em;
+    color: #58658c;
+  }
+
+  div.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+    padding: 0% 30%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    div.conteudo {
+      background-color: white;
+      padding: 10px;
+      border-radius: 5px;
+      width: 400px;
+
+      aside.container {
+        div.title {
+          display: flex;
+          gap: 10px;
+          align-items: center;
+
+          i {
+            color: #58658c;
+            font-size: 1.5em;
+            cursor: pointer;
+          }
+        }
+      }
+
+      textarea.motivo {
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        margin: 0;
+        text-transform: uppercase;
+        resize: none;
+        width: 100%;
+        height: 100px;
+        border: 1px solid #58658c;
+        outline: none;
+        padding: 10px;
+      }
+
+      button {
+        margin-top: 10px;
+        justify-content: center;
+        padding: 10px;
+        transition: .3s;
+
+        h2 {
+          color: white;
+        }
+
+        &:hover {
+          transform: scale(1.01);
+        }
+      }
+    }
+  }
+
+  main {
+    margin-left: 60px;
+    width: calc(100vw - 80px);
+    padding: 30px 40px;
+
+    aside.pedido {
+      margin-bottom: 20px;
+
+      div {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+
+        p.data {
+          margin-left: auto;
+        }
+
+      }
+    }
+
+    span {
+      font-weight: 300;
+      color: #58658c;
+    }
+
+    section.conteudo {
+
+      .alert {
+        display: flex;
+        justify-content: center;
+        margin: 5px 0px;
+
+        h2 {
+          padding: 5px;
+          border-radius: 5px;
+          color: var(--white-010);
+          width: 50%;
+          text-align: center;
+        }
+
+      }
+
+      .alert-success {
+        h2 {
+          background-color: rgb(0, 187, 0);
+        }
+      }
+
+      .alert-error {
+        h2 {
+          background-color: red;
+        }
+      }
+
+      div.cliente-status {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        button {
+          width: 250px;
+          padding: 10px;
+          border: 1px solid var(--primary);
+          background-color: var(--white-010);
+          justify-content: center;
+
+          h2 {
+            color: var(--primary);
+          }
+        }
+      }
+
+      div.pagamento {
+        margin-bottom: 10px;
+      }
+
+      div.cupom {
+        margin-bottom: 10px;
+
+        .cupomSelecionado {
+          width: 500px;
+          background-color: var(--white);
+          border-radius: 5px;
+          border: 1px solid rgb(195, 195, 195);
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+          padding: 10px;
+
+          h2,
+          p {
+            font-size: .8em;
+            color: black;
+          }
+
+          img {
+            width: 50px;
+            height: 50px;
+          }
+        }
+
+      }
+
+      div.endereco {
+        display: flex;
+        gap: 2px;
+      }
+
+      div.observacao {
+        margin-bottom: 10px;
+      }
+
+      div.btns {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+
+        button {
+          display: flex;
+          justify-content: center;
+          padding: 10px;
+          width: 100px;
+
+          h2 {
+            color: var(--white);
+          }
+
+          &:hover {
+            transform: scale(1.03);
+          }
+
+        }
+
+        button.negar {
+          background-color: red;
+        }
+
+        button.nota {
+          width: 150px;
+          background-color: #58658c;
+        }
+
+        i {
+          color: #58658c;
+          font-size: 1.5em;
+          margin-left: auto;
+          transition: .3s;
+
+          &:hover {
+            transform: scale(1.03);
+          }
+        }
+      }
+
+    }
+  }
+
+}

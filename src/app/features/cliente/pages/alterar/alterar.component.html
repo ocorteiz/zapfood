@@ -1,0 +1,42 @@
+<app-header></app-header>
+<main>
+  <aside class="back">
+    <div>
+      <i class="bi bi-arrow-left-short" [routerLink]="['/', dynamicParam, 'perfil']"></i>
+      <p>ALTERAR INFORMAÇÔES</p>
+    </div>
+    <hr>
+  </aside>
+  <section class="dados">
+
+    <div *ngIf="messageSucess" class="alert alert-success">
+      <h2>{{messageSucess.toUpperCase()}}</h2>
+    </div>
+
+    <div *ngIf="messageErro" class="alert alert-error">
+      <h2>{{messageErro.toUpperCase()}}</h2>
+    </div>
+
+    <form (ngSubmit)="onSubmit()" [formGroup]="infoUsuarioForm">
+
+      <label for="nome-input" class="nome label">
+        <input id="nome-input" class="nome-input" type="text" placeholder="Nome" name="nome" formControlName="nome" required>
+      </label>
+
+      <label for="telefone-input" class="telefone label">
+        <input id="telefone-input" class="telefone-input" type="text" placeholder="Telefone: (xx) x xxxx-xxxx" name="telefone" formControlName="telefone" (input)="onPhoneInput($event)" autocomplete="tel" required>
+      </label>
+
+      <div *ngIf="erro" class="erro">
+        <p>{{ erro.toUpperCase() }}</p>
+      </div>
+
+      <button type="submit">
+        <h2>ALTERAR DADOS</h2>
+      </button>
+
+    </form>
+
+  </section>
+</main>
+<app-footer></app-footer>

@@ -1,0 +1,201 @@
+<app-header></app-header>
+
+<main>
+  <aside class="menu-status">
+    <h1 class="item-status">
+      LOJA
+    </h1>
+    <hr>
+  </aside>
+
+  <section  class="conteudo">
+
+    <div *ngIf="getLoja() as loja" class="btns">
+      <button *ngIf="loja.status" (click)="updateStatus()" class="encerrar">
+        <h2>FECHAR LOJA</h2>
+      </button>
+
+      <button *ngIf="!loja.status" (click)="updateStatus()" class="iniciar">
+        <h2>ABRIR LOJA</h2>
+      </button>
+
+      <button (click)="logout()" class="encerrar">
+        <h2>SAIR</h2>
+      </button>
+    </div>
+
+    <form *ngIf="getLoja() as loja" (ngSubmit)="onSubmitUpdate()">
+
+      <div class="cont-1">
+        <div class="imagem">
+          <label for="imagem-input" class="image-label">
+            <img [src]="imagePreview" *ngIf="imagePreview">
+            <img *ngIf="!imagePreview && loja?.logo" [src]="getImageUrl(loja.logo)" alt="Logo da loja" />
+            <input class="imagem-input" id="imagem-input" type="file" alt="Input Imagem" accept="image/*"
+              (change)="onFileSelected($event)" required>
+          </label>
+        </div>
+
+        <div class="text">
+          <label for="nome-input" class="nome label">
+            <h2>NOME: </h2>
+            <input id="nome-input" class="nome-input" type="text" placeholder="EX: LOJA EXEMPLO" [(ngModel)]="loja.nome"
+              name="nome" required>
+          </label>
+
+          <label for="descricao-input" class="descricao label">
+            <h2>DESCRIÇÃO: </h2>
+            <input id="descricao-input" class="descricao-input" type="text"
+              placeholder="EX: A MELHOR LOJA DE HAMBURGUER" [(ngModel)]="loja.descricao" name="descricao" required>
+          </label>
+
+          <label for="endereco-input" class="endereco label">
+            <h2>ENDEREÇO: </h2>
+            <input id="endereco-input" class="endereco-input" type="text"
+              placeholder="EX: BAIRRO CENTRO, RUA 3, CASA 7, QUADRA 7" [(ngModel)]="loja.endereco" name="endereco"
+              required>
+          </label>
+          <label for="cor-input" class="cor label">
+            <h2>COR DE TEMA: </h2>
+            <input type="color" class="cor-input" id="cor-input" [(ngModel)]="loja.corDeTema" name="corDeTema" required>
+          </label>
+        </div>
+
+      </div>
+
+      <div class="cont-2">
+
+        <label for="link-input" class="link label">
+          <h2>LINK DE WHATASAPP: </h2>
+          <input id="link-input" class="link-input" type="text" placeholder="EX: HTTPS://WA.ME/5599999999999"
+            [(ngModel)]="loja.linkDeWhatsapp" name="linkDeWhatsapp" required>
+        </label>
+
+        <div class="datas">
+
+          <label for="diaAbertura-input" class="diaAbertura label">
+            <h2>DIA DE ABERTURA: </h2>
+            <input id="diaAbertura-input" class="diaAbertura-input" type="text" placeholder="EX: SEGUNDA-FEIRA"
+              [(ngModel)]="loja.diaInicio" name="diaInicio" required>
+          </label>
+
+          <label for="diaFim-input" class="diaFim label">
+            <h2>DIA DE FECHAMENTO: </h2>
+            <input id="diaFim-input" class="diaFim-input" type="text" placeholder="EX: SEGUNDA-FEIRA"
+              [(ngModel)]="loja.diaFim" name="diaFim" required>
+          </label>
+          <label for="horarioAbertura-input" class="horarioAbertura label">
+            <h2>HORARIO DE ABERTURA: </h2>
+            <input id="horarioAbertura-input" class="horarioAbertura-input" type="text" placeholder="EX: 19:00"
+              [(ngModel)]="loja.horarioInicio" name="horarioInicio" (input)="onHoraripInput($event)" required>
+          </label>
+
+          <label for="horarioFechamento-input" class="horarioFechamento label">
+            <h2>HORARIO DE FCEHAMENTO: </h2>
+            <input id="horarioFechamento-input" class="horarioFechamento-input" type="text" placeholder="EX: 00:00"
+              [(ngModel)]="loja.horarioFim" name="horarioFim" (input)="onHoraripInput($event)" required>
+          </label>
+
+        </div>
+
+      </div>
+
+      <div *ngIf="erro" class="erro">
+        <h2>{{erro.toUpperCase()}}</h2>
+      </div>
+
+      <button>
+        <h2>ATUALIZAR</h2>
+      </button>
+
+    </form>
+
+    <form *ngIf="!getLoja() as loja" (ngSubmit)="onSubmitCadastro()" [formGroup]="lojaForm">
+
+      <div class="cont-1">
+        <div class="imagem">
+          <label for="imagem-input" class="image-label">
+            <span *ngIf="!imagePreview">SELECIONE UMA IMAGEM</span>
+            <img [src]="imagePreview" *ngIf="imagePreview != null" />
+            <input class="imagem-input" id="imagem-input" type="file" alt="Input Imagem" accept="image/*"
+              (change)="onFileSelected($event)">
+          </label>
+        </div>
+
+        <div class="text">
+          <label for="nome-input" class="nome label">
+            <h2>NOME: </h2>
+            <input id="nome-input" class="nome-input" type="text" placeholder="EX: LOJA EXEMPLO" formControlName="nome"
+              required>
+          </label>
+
+          <label for="descricao-input" class="descricao label">
+            <h2>DESCRIÇÃO: </h2>
+            <input id="descricao-input" class="descricao-input" type="text"
+              placeholder="EX: A MELHOR LOJA DE HAMBURGUER" formControlName="descricao" required>
+          </label>
+
+          <label for="endereco-input" class="endereco label">
+            <h2>ENDEREÇO: </h2>
+            <input id="endereco-input" class="endereco-input" type="text"
+              placeholder="EX: BAIRRO CENTRO, RUA 3, CASA 7, QUADRA 7" formControlName="endereco" required>
+          </label>
+
+          <label for="cor-input" class="cor label">
+            <h2>COR DE TEMA: </h2>
+            <input type="color" class="cor-input" id="cor-input" formControlName="corDeTema" required>
+          </label>
+        </div>
+
+      </div>
+
+      <div class="cont-2">
+
+        <label for="link-input" class="link label">
+          <h2>LINK DE WHATASAPP: </h2>
+          <input id="link-input" class="link-input" type="text" placeholder="EX: HTTPS://WA.ME/5599999999999"
+            formControlName="linkDeWhatsapp" required>
+        </label>
+
+        <div class="datas">
+
+          <label for="diaAbertura-input" class="diaAbertura label">
+            <h2>DIA DE ABERTURA: </h2>
+            <input id="diaAbertura-input" class="diaAbertura-input" type="text" placeholder="EX: SEGUNDA-FEIRA"
+              formControlName="diaInicio" required>
+          </label>
+
+          <label for="diaFim-input" class="diaFim label">
+            <h2>DIA DE FECHAMENTO: </h2>
+            <input id="diaFim-input" class="diaFim-input" type="text" placeholder="EX: SEGUNDA-FEIRA"
+              formControlName="diaFim" required>
+          </label>
+
+          <label for="horarioAbertura-input" class="horarioAbertura label">
+            <h2>HORARIO DE ABERTURA: </h2>
+            <input id="horarioAbertura-input" class="horarioAbertura-input" type="text" placeholder="EX: 19:00"
+              formControlName="horarioInicio" (input)="onHoraripInput($event)" required>
+          </label>
+
+          <label for="horarioFechamento-input" class="horarioFechamento label">
+            <h2>HORARIO DE FCEHAMENTO: </h2>
+            <input id="horarioFechamento-input" class="horarioFechamento-input" type="text" placeholder="EX: 00:00"
+              formControlName="horarioFim" (input)="onHoraripInput($event)" required>
+          </label>
+
+        </div>
+
+      </div>
+
+      <div *ngIf="erro" class="erro">
+        <h2>{{erro.toUpperCase()}}</h2>
+      </div>
+
+      <button>
+        <h2>CADASTRAR</h2>
+      </button>
+
+    </form>
+
+  </section>
+</main>

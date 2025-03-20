@@ -1,0 +1,30 @@
+<app-header></app-header>
+<main>
+  <aside class="back">
+    <div>
+      <i class="bi bi-arrow-left-short" [routerLink]="['/', dynamicParam]"></i>
+      <p>DETALHES DA LOJA</p>
+    </div>
+    <hr>
+  </aside>
+
+  <section *ngIf="getLoja() as loja" class="detalhes">
+    <div class="nome">
+      <h1>{{ loja.nome.toUpperCase() }}</h1>
+      <p>{{ loja.descricao.toUpperCase() }}</p>
+    </div>
+    <div class="info">
+      <h2>HORARIO DE FUNCIONAMENTO:</h2>
+        <div class="horario">
+          <h3>{{ loja.diaInicio.toUpperCase() }} A {{ loja.diaFim.toUpperCase() }}</h3>
+          <h3>{{ loja.horarioInicio.toUpperCase() }} ATÉ {{ loja.horarioFim.toUpperCase() }}</h3>
+        </div>
+    </div>
+    <div class="info endereco">
+      <h2>ENDEREÇO:</h2>
+      <p>{{loja.endereco.toUpperCase()}}</p>
+    </div>
+  </section>
+
+</main>
+<app-footer></app-footer>

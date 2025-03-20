@@ -1,0 +1,88 @@
+<app-header></app-header>
+
+<div class="overlay" *ngIf="showAddCliente">
+  <app-container-clientes [mode]="mode" [idCupom]="idCupom" *ngIf="showAddCliente"
+    (messageEvent)="receberMensagem($event)" (close)="toggleContainerCliente()"></app-container-clientes>
+</div>
+
+<div class="overlay" *ngIf="showAddCupom">
+  <app-form-cupom *ngIf="showAddCupom" (messageEvent)="receberMensagem($event)"
+    (close)="toggleAddCupom()"></app-form-cupom>
+</div>
+
+<main>
+  <aside class="menu-status">
+    <h1 class="item-status">
+      CUPONS
+    </h1>
+    <hr>
+  </aside>
+
+  <section class="conteudo">
+    <div class="cadastro">
+      <h2 class="cadastro" (click)="toggleAddCupom()">+ CADASTRAR CUPOM</h2>
+    </div>
+
+    <div *ngIf="messageSucess" class="alert alert-success">
+      <h2>{{messageSucess.toUpperCase()}}</h2>
+    </div>
+
+    <div *ngIf="messageError" class="alert alert-error">
+      <h2>{{messageError.toUpperCase()}}</h2>
+    </div>
+
+    <div class="ativos" *ngFor="let status of getCupons()">
+      <h1>{{status.status.toUpperCase()}}</h1>
+
+      <section class="cupons">
+        <div class="cupom" *ngFor="let cupom of status.cupons">
+
+          <div *ngIf="showDelete" class="overlay">
+            <div class="conteudo">
+              <aside>
+                <div class="title">
+                  <i class="bi bi-arrow-left-short" (click)="toggleDelete()"></i>
+                  <p>ATENÇÃO</p>
+                </div>
+                <hr>
+              </aside>
+
+              <p class="description">AO DELETAR CUPOM, TODOS OS DADOS DE <strong>PEDIDOS</strong> VINCULADO A ESSE SERÃO PERDIDOS E ELE
+                SERA DESVINCULADOS DE TODOS OS <strong>CLIENTES</strong> QUE O POSSUA</p>
+              <hr>
+              <button (click)="deletarCupom(cupom.id)">
+                <h2>DELETAR</h2>
+              </button>
+            </div>
+          </div>
+
+          <div class="info">
+            <div>
+              <h2>{{ cupom.nome.toUpperCase() }} | {{cupom.codigo.toUpperCase()}}</h2>
+              <p>{{ cupom.descricao.toUpperCase() }}</p>
+              <p>VALOR: {{cupom.valor | currency:'BRL':'symbol':'1.2-2' }} </p>
+              <p>PARA PEDIDO ACIMA DE: {{cupom.valorParaPedido | currency:'BRL':'symbol':'1.2-2' }} </p>
+              <h2>VALIDADE: {{ cupom.dataDeValidade | date:'dd/MM/yyyy'}}</h2>
+              <h2>TIPO:
+                <span *ngIf="cupom.resgatavel" >RESGATAVEL</span>
+                <span *ngIf="!cupom.resgatavel">NÃO RESGATAVEL</span>
+              </h2>
+            </div>
+            <img src="../../../assets/logo-cupom.png" alt="">
+          </div>
+          <div class="edit">
+            <h2 class="delete" (click)="toggleDelete()">DELETAR</h2>
+            <h2 class="add" *ngIf="cupom.status" (click)="toggleAddCliente(cupom.id)">ADICIONAR A CLIENTE</h2>
+            <h2 class="add" *ngIf="cupom.status" (click)="toggleRemoveCliente(cupom.id)">REMOVER DE CLIENTE</h2>
+            <h2 class="desativar" *ngIf="cupom.status" (click)="desativarCupom(cupom.id)">DESATIVAR</h2>
+            <h2 class="ativar" *ngIf="!cupom.status" (click)="ativarCupom(cupom.id)">ATIVAR</h2>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+
+
+  </section>
+</main>

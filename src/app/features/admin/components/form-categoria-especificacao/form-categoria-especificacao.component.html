@@ -1,0 +1,31 @@
+<section  class="form-categoria">
+  <aside class="back">
+    <div>
+      <i class="bi bi-arrow-left-short" (click)="closeModal()"></i>
+      <p>CADASTRAR CATEGORIA</p>
+    </div>
+    <hr>
+  </aside>
+
+  <form (ngSubmit)="onSubmit()" [formGroup]="categoriaForm">
+
+    <label for="nome-input" class="nome label">
+      <h2>NOME: </h2>
+      <input id="nome-input" class="nome-input" type="text" formControlName="nome" name="nome" placeholder="EX: PONTO DA CARNE">
+    </label>
+
+    <label for="minimo-input" class="minimo label">
+      <h2>MINIMO DE ITENS POR CATEGORIA: </h2>
+      <input id="minimo-input" class="minimo-input" type="number" min="1" formControlName="minimoPorCategoria" name="minimoPorCategoria" placeholder="EX: 1">
+    </label>
+
+    <div *ngIf="erro" class="erros">
+      <p>{{erro.toUpperCase()}}</p>
+    </div>
+
+    <button type="submit">
+      <h2>CADASTRAR</h2>
+    </button>
+
+  </form>
+</section>

@@ -1,0 +1,53 @@
+<section class="container-adicionais" *ngIf="mode == 'add'">
+  <aside class="back">
+    <div>
+      <i class="bi bi-arrow-left-short" (click)="closeModal()"></i>
+      <p>ADICIONAR ADICIONAIS</p>
+    </div>
+    <hr>
+  </aside>
+
+  <label class="search">
+    <i class="bi bi-search"></i>
+    <input type="text" placeholder="PROCURE POR ADICIONAL" [(ngModel)]="searchText" name="search">
+  </label>
+
+  <form class="adicionais">
+
+    <div *ngFor="let adicional of filteredAdicionais" class="adicional" (click)="addAdicional(adicional.id, idProduto)">
+      <div class="text">
+          <h2>{{ adicional.nome.toUpperCase() }}</h2>
+          <p>{{ adicional.descricao.toUpperCase() }}</p>
+          <h2 class="preco">{{ adicional.preco | currency:'BRL':'symbol':'1.2-2' }}</h2>
+      </div>
+    </div>
+
+  </form>
+</section>
+
+<section  class="container-adicionais" *ngIf="mode == 'remove'">
+  <aside class="back">
+    <div>
+      <i class="bi bi-arrow-left-short" (click)="closeModal()"></i>
+      <p>REMOVER ADICIONAIS</p>
+    </div>
+    <hr>
+  </aside>
+
+  <label class="search">
+    <i class="bi bi-search"></i>
+    <input type="text" placeholder="PROCURE POR ADICIONAL" [(ngModel)]="searchText" name="search">
+  </label>
+
+  <form class="adicionais">
+
+    <div *ngFor="let adicional of filteredAdicionais" class="adicional" (click)="removerAdicional(adicional.id, idProduto)">
+      <div class="text">
+          <h2>{{ adicional.nome.toUpperCase() }}</h2>
+          <p>{{ adicional.descricao.toUpperCase() }}</p>
+          <h2 class="preco">{{ adicional.preco | currency:'BRL':'symbol':'1.2-2' }}</h2>
+      </div>
+    </div>
+
+  </form>
+</section>

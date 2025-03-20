@@ -1,0 +1,127 @@
+<app-header></app-header>
+
+<div *ngIf="showAddPagamento" class="overlay">
+  <app-form-pagamento *ngIf="showAddPagamento" (messageEvent)="receberMessagem($event)"
+    (close)="toggleAddPagamento()"></app-form-pagamento>
+</div>
+
+
+<main>
+
+  <aside class="menu-status">
+    <div>
+      <h2 class="item-status active" (click)="selectStatus('PAGAMENTOS', $event)">
+        MÉTODOS DE PAGAMENTO
+      </h2>
+      <h2 class="item-status" (click)="selectStatus('PIX', $event)">
+        PAGAMENTO VIA PIX
+      </h2>
+    </div>
+    <hr>
+  </aside>
+
+  <section class="conteudo" *ngIf="pagina == 'PAGAMENTOS'">
+    <div class="cadastro">
+      <h2 class="cadastro" (click)="toggleAddPagamento()">+ CADASTRAR MÉTODO DE PAGAMENTO</h2>
+    </div>
+
+    <div *ngIf="messageSucess" class="alert alert-success">
+      <h2>{{messageSucess.toUpperCase()}}</h2>
+    </div>
+
+    <div *ngIf="messageError" class="alert alert-error">
+      <h2>{{messageError.toUpperCase()}}</h2>
+    </div>
+
+    <div class="pagamentos">
+
+      <div class="pagamento" *ngFor="let pagamento of getPagamentos()">
+
+        <div *ngIf="showDelete" class="overlay">
+          <div class="conteudo">
+            <aside>
+              <div class="title">
+                <i class="bi bi-arrow-left-short" (click)="toggleDelete()"></i>
+                <p>ATENÇÃO</p>
+              </div>
+              <hr>
+            </aside>
+
+            <p class="description">AO DELETAR MÉTODO DE PAGAMENTO, TODOS OS DADOS DE <strong>PEDIDOS</strong> VINCULADO A ESSE SERÃO
+              PERDIDOS </p>
+            <hr>
+            <button (click)="deletarPagamento(pagamento.id)">
+              <h2>DELETAR</h2>
+            </button>
+          </div>
+        </div>
+
+        <h2>
+          {{ pagamento.nome.toUpperCase() }}:
+          <span *ngIf="pagamento.status" class="ativo">ATIVO</span>
+          <span *ngIf="!pagamento.status" class="desativado">DESATIVADO</span>
+        </h2>
+
+        <div class="btns">
+          <button *ngIf="pagamento.status" class="desativado" (click)="desativarPagamento(pagamento.id)">
+            <h2>DESATIVAR</h2>
+          </button>
+          <button *ngIf="!pagamento.status" class="ativo" (click)="ativarPagamento(pagamento.id)">
+            <h2>ATIVAR</h2>
+          </button>
+          <button (click)="toggleDelete()">
+            <h2>DELETAR</h2>
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="conteudo token" *ngIf="pagina == 'PIX'">
+
+    <div *ngIf="messageSucess" class="alert alert-success">
+      <h2>{{messageSucess.toUpperCase()}}</h2>
+    </div>
+
+    <div *ngIf="messageError" class="alert alert-error">
+      <h2>{{messageError.toUpperCase()}}</h2>
+    </div>
+
+    <div class="form-btns">
+
+      <form (ngSubmit)="onSubmitToken()" [formGroup]="MPTokensForm" class="token">
+
+        <label for="mPToken-input" class="mPToken label">
+          <h2>AUTH TOKEN: </h2>
+          <input id="mPToken-input" class="mPToken-input" type="password" formControlName="mPToken" name="mPToken"
+            required>
+        </label>
+
+        <div *ngIf="erro" class="erros">
+          <p>{{erro.toUpperCase()}}</p>
+        </div>
+
+        <button type="submit">
+          <h2>ATUALIZAR</h2>
+        </button>
+
+      </form>
+
+      <div class="btns" *ngIf="getTokens()">
+
+        <button *ngIf="!getPagamento()?.status" (click)="ativarPagamentoViaPix()">
+          <h2>ATIVAR PAGAMENTO VIA PIX</h2>
+        </button>
+
+        <button *ngIf="getPagamento()?.status" (click)="desativarPagamentoViaPix()">
+          <h2>DESATIVAR PAGAMENTO VIA PIX</h2>
+        </button>
+      </div>
+
+    </div>
+
+  </section>
+</main>

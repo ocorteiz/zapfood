@@ -1,0 +1,15 @@
+<section class="form-cupons">
+  <aside class="back">
+    <div>
+      <i class="bi bi-arrow-left-short" (click)="closeModal()"></i>
+      <p>MEUS CUPONS</p>
+    </div>
+    <hr>
+  </aside>
+  <section class="cupons">
+    <app-card-cupom
+    [getCupons]="getCupons()"
+    (cupomClicked)="closeModal()"
+    (cupomSelecionado)="onCupomSelecionado($event)" ></app-card-cupom>
+  </section>
+</section>

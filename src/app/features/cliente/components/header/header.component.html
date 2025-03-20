@@ -1,0 +1,14 @@
+<header *ngIf="getLoja() as loja">
+  <div class="logo" [routerLink]="['/']">
+    <img [src]="getImageUrl(loja.logo)" alt="Logo">
+    <h1>{{ loja.nome.toUpperCase() }}</h1>
+  </div>
+  <div class="sociais">
+    <a [href]="loja.linkDeWhatsapp">
+      <i class="bi bi-whatsapp"></i>
+    </a>
+    <a href="">
+      <i class="bi bi-share-fill"></i>
+    </a>
+  </div>
+</header>

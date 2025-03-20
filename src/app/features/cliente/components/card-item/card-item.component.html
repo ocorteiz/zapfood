@@ -1,0 +1,32 @@
+<div *ngFor="let item of getItens" class="card-item" [id]="item.id">
+  <div  class="item">
+    <img [src]="getImageUrl(item.imagem)" alt="">
+    <div class="text">
+      <h1>{{ item.quantidade }}X - {{ item.nome.toUpperCase() }} <span *ngIf="!visible" ></span></h1>
+      <div>
+
+        <p  class="especificacoes" >
+          {{ isMobile
+            ? (getConcateEspecificacao(item) | slice:0:15)
+            + (getConcateEspecificacao(item).length > 15 ? '...' : '')
+            : getConcateEspecificacao(item) }}
+        </p>
+
+        <p>
+          {{getConcateAdicional(item)}}
+        </p>
+
+        <p *ngIf="item.observacao as observacao" >
+          *{{ observacao.toUpperCase() }}
+        </p>
+
+      </div>
+      <h2>{{ item.total | currency:'BRL':'symbol':'1.2-2' }}</h2>
+    </div>
+  </div>
+  <button *ngIf="visible" class="qtd">
+    <i (click)="deleteItem(item.id)" class="bi bi-trash-fill"></i>
+    <span>{{ item.quantidade }}</span>
+    <i (click)="updateItem(item.id)" class="bi bi-plus-lg"></i>
+  </button>
+</div>

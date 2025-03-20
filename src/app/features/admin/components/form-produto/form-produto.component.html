@@ -1,0 +1,159 @@
+<section *ngIf="mode === 'add'" class="form produto">
+  <aside class="back">
+    <div>
+      <i class="bi bi-arrow-left-short" (click)="closeModal()"></i>
+      <p>CADASTRAR PRODUTO</p>
+    </div>
+    <hr>
+  </aside>
+
+  <form (ngSubmit)="onSubmitCadastro()" [formGroup]="produtoForm">
+
+    <div class="imagem">
+
+      <label for="imagem-input" class="image-label">
+        <span *ngIf="!imagePreview">SELECIONE UMA IMAGEM</span>
+        <img *ngIf="imagePreview" [src]="imagePreview" alt="Imagem prévia selecionada" />
+        <input class="imagem-input" id="imagem-input" type="file" alt="Input Imagem" accept="image/*"
+          (change)="onFileSelected($event)" required>
+      </label>
+
+    </div>
+
+    <div class="text">
+
+      <label for="nome-input" class="nome label">
+        <h2>NOME: </h2>
+        <input id="nome-input" class="nome-input" type="text" placeholder="EX: X-BACON" formControlName="nome" name="nome" required>
+      </label>
+
+      <label for="descricao-input" class="descricao label">
+        <h2>DESCRIÇÃO: </h2>
+        <input id="descricao-input" class="descricao-input" type="text" placeholder="EX: BLEND 150g / BACON..." formControlName="descricao" name="descricao" required>
+      </label>
+
+      <label for="preco-input" class="preco label">
+        <h2>PREÇO: </h2>
+        <input id="preco-input" class="preco-input" type="number" min="1" placeholder="EX: 20.00" formControlName="preco" name="preco" required>
+      </label>
+
+      <label for="categoria-input" class="preco label">
+        <h2>CATEGORIA: </h2>
+        <select name="categoria-input" id="categoria-input" formControlName="idCategoria">
+          <option disabled selected>SELECIONE UMA CATEGORIA</option>
+          <option *ngFor="let categoria of getCategoriasDeProduto()" [ngValue]="categoria.id">{{ categoria.nome }}</option>
+        </select>
+      </label>
+
+      <div *ngIf="erro" class="erros">
+        <p>{{erro.toUpperCase()}}</p>
+      </div>
+
+      <button type="submit">
+        <h2>CADASTRAR</h2>
+      </button>
+
+    </div>
+
+  </form>
+</section>
+
+<section *ngIf="mode === 'update'" class="form update">
+  <aside class="back">
+    <div>
+      <i class="bi bi-arrow-left-short" (click)="closeModal()"></i>
+      <p>ATUALIZAR PRODUTO</p>
+    </div>
+    <hr>
+  </aside>
+
+  <form (ngSubmit)="onSubmitUpdate()" *ngIf="getProduto() as produto">
+
+    <div class="imagem">
+
+      <label for="imagem-input" class="image-label">
+        <img *ngIf="imagePreview" [src]="imagePreview" alt="Imagem prévia selecionada" />
+        <img *ngIf="!imagePreview && produto.imagem" [src]="getImageUrl(produto.imagem)" alt="Logo da loja" />
+        <input class="imagem-input" id="imagem-input" type="file" alt="Input Imagem" accept="image/*"
+          (change)="onFileSelected($event)">
+      </label>
+
+    </div>
+
+    <div class="text">
+
+
+      <label for="descricao-input" class="descricao label">
+        <h2>DESCRIÇÃO: </h2>
+        <input id="descricao-input" class="descricao-input" type="text" placeholder="EX: BLEND 150g / BACON..." [(ngModel)]="produto.descricao" name="descricao" required>
+      </label>
+
+      <label for="preco-input" class="preco label">
+        <h2>PREÇO: </h2>
+        <input id="preco-input" class="preco-input" type="number" min="1" placeholder="EX: 20.00" [(ngModel)]="produto.preco" name="preco" required>
+      </label>
+
+      <div *ngIf="erro" class="erros">
+        <p>{{erro.toUpperCase()}}</p>
+      </div>
+
+      <button>
+        <h2>ATUALIZAR</h2>
+      </button>
+
+    </div>
+
+  </form>
+</section>
+
+<section *ngIf="mode === 'promocao'" class="form promocao">
+  <aside class="back">
+    <div>
+      <i class="bi bi-arrow-left-short" (click)="closeModal()"></i>
+      <p>CADASTRAR PROMOÇÃO</p>
+    </div>
+    <hr>
+  </aside>
+
+  <form (ngSubmit)="onSubmitPromocao()" [formGroup]="produtoForm">
+
+    <div class="imagem">
+      <label for="imagem-input" class="image-label">
+        <span *ngIf="!imagePreview">SELECIONE UMA IMAGEM</span>
+        <img *ngIf="imagePreview" [src]="imagePreview" alt="Imagem prévia selecionada" />
+        <input class="imagem-input" id="imagem-input" type="file" alt="Input Imagem" accept="image/*"
+          (change)="onFileSelected($event)" required>
+      </label>
+    </div>
+
+    <div class="text">
+
+      <label for="nome-input" class="nome label">
+        <h2>NOME: </h2>
+        <input id="nome-input" class="nome-input" type="text" placeholder="EX: X-BACON + COCA LATA 220ML" formControlName="nome" name="nome" required >
+      </label>
+
+      <label for="descricao-input" class="descricao label">
+        <h2>DESCRIÇÃO: </h2>
+        <input id="descricao-input" class="descricao-input" type="text" placeholder="EX: X-BACON (1) + COCA LATA 220ML (1)" formControlName="descricao" name="descricao" required >
+      </label>
+
+      <label for="preco-input" class="preco label">
+        <h2>PREÇO: </h2>
+        <input id="preco-input" class="preco-input" type="number" min="1" placeholder="EX: 30.00" formControlName="preco" name="preco" required>
+      </label>
+
+      <div *ngIf="erro" class="erros">
+        <p>{{erro.toUpperCase()}}</p>
+      </div>
+
+      <button type="submit">
+        <h2>CADASTRAR PROMOÇÃO</h2>
+      </button>
+
+    </div>
+
+  </form>
+</section>
+
+

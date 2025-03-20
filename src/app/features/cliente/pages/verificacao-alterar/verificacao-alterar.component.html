@@ -1,0 +1,34 @@
+<app-header></app-header>
+<main>
+  <aside class="back">
+    <div>
+      <i class="bi bi-arrow-left-short" [routerLink]="(['/perfil'])"></i>
+      <p>ALTERAR INFORMAÇÔES</p>
+    </div>
+    <hr>
+  </aside>
+  <section class="dados">
+    <div class="form register">
+
+      <h2>INFORME O CODIGO ENVIADO EM SEU TELEFONE:</h2>
+
+      <form (ngSubmit)="onSubmit()" [formGroup]="validarCodigoForm">
+        <label>
+          <input placeholder="EX: XXXXXX" type="number" name="codigoEscrito" formControlName="codigoEscrito" required  />
+        </label>
+
+        <div *ngIf="erro" class="erro">
+          <p>{{ erro.toUpperCase() }}</p>
+        </div>
+
+        <a [routerLink]="['/alterar']">Informar outro telefone</a>
+
+        <button type="submit">
+          <h2>CONFIRMAR</h2>
+        </button>
+      </form>
+
+    </div>
+  </section>
+</main>
+<app-footer></app-footer>

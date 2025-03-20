@@ -1,0 +1,171 @@
+:host {
+
+  h1,
+  h2,
+  h3,
+  p {
+    color: #58658c;
+    font-size: 1em;
+  }
+
+  main {
+    margin-left: 60px;
+    width: calc(100vw - 80px);
+    padding: 30px 40px;
+
+    aside {
+
+      h1 {
+        padding-bottom: 10px;
+      }
+
+      hr {
+        margin: 0px;
+        margin-bottom: 10px;
+        color: #58658c;
+      }
+
+    }
+
+    section.conteudo {
+
+      div.btns {
+        display: flex;
+        justify-content: space-between;
+
+        button.encerrar {
+          background-color: red;
+        }
+
+        button.iniciar {
+          background-color: rgb(0, 154, 0);
+        }
+
+      }
+
+      form {
+        margin: 20px 0px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+        width: 1000px;
+
+        div.erro {
+          h2 {
+            color: red;
+            font-size: .9em;
+          }
+        }
+
+        .label {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+
+          input,
+          select {
+            width: 100%;
+            text-transform: uppercase;
+            outline: none;
+            border: 1px solid #58658c70;
+            padding: 10px;
+            border-radius: 5px;
+          }
+
+        }
+
+        input[type="file"] {
+          display: none;
+        }
+
+        div.cont-1 {
+          display: flex;
+          gap: 20px;
+          width: 100%;
+
+          div.text {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 100%;
+
+            input[type="color"] {
+              width: 50px;
+              height: 50px;
+              padding: 5px;
+            }
+          }
+
+          .image-label {
+            margin: 0 auto;
+            width: 300px;
+            height: 300px;
+            cursor: pointer;
+            background-size: cover;
+            background-position: center;
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            img {
+              border-radius: 10px;
+              width: 290px;
+              height: 290px;
+            }
+
+            span {
+              pointer-events: none;
+              text-align: center;
+              font-size: .9em;
+              color: #58658c;
+            }
+
+            &:hover {
+              border-color: #58658c;
+            }
+
+          }
+
+        }
+
+        div.cont-2 {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+
+          div.datas {
+            display: grid;
+            gap: 10px;
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+
+      }
+
+      button {
+        padding: 10px;
+        width: 200px;
+        justify-content: center;
+        transition: .3s;
+
+        &:hover {
+          transform: scale(1.01);
+        }
+
+        h2 {
+          color: white;
+        }
+      }
+
+
+    }
+
+  }
+
+}

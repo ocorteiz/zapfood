@@ -1,0 +1,52 @@
+<section class="form-endereco">
+  <aside class="back">
+    <div>
+      <i class="bi bi-arrow-left-short" (click)="closeModal()"></i>
+      <p>CADASTRAR ENDEREÇO DE ENTREGA</p>
+    </div>
+    <hr>
+  </aside>
+
+  <form *ngIf="mode == 'add'" (ngSubmit)="onSubmitCadastro()" [formGroup]="enderecoForm">
+
+    <label for="nome-input" class="nome label">
+      <h2>NOME: </h2>
+      <input id="nome-input" class="nome-input" type="text" placeholder="EX: CENTRO" formControlName="nome" name="nome"
+        required>
+    </label>
+
+    <label for="taxa-input" class="taxa label">
+      <h2>TAXA DE ENTREGA: </h2>
+      <input id="taxa-input" class="taxa-input" type="number" min="1" placeholder="EX: R$5.00"
+        formControlName="taxaDeEntrega" name="taxDeEntrega" required>
+    </label>
+
+    <div class="erros">
+      <p>{{erro.toUpperCase()}}</p>
+    </div>
+
+    <button type="submit">
+      <h2>CADASTRAR</h2>
+    </button>
+
+  </form>
+
+  <form *ngIf="mode == 'update'" (ngSubmit)="onSubmitUpdate()" [formGroup]="enderecoForm">
+
+
+    <label for="taxa-input" class="taxa label">
+      <h2>TAXA DE ENTREGA: </h2>
+      <input id="taxa-input" class="taxa-input" type="number" min="1" placeholder="EX: R$5.00"
+        formControlName="taxaDeEntrega" name="taxDeEntrega" required>
+    </label>
+
+    <div class="erros">
+      <p>{{erro.toUpperCase()}}</p>
+    </div>
+
+    <button type="submit">
+      <h2>ATUALIZAR</h2>
+    </button>
+
+  </form>
+</section>

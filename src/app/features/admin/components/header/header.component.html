@@ -1,0 +1,54 @@
+<header class="menu">
+  <nav class="menu-container">
+
+    <div class="item">
+      <i class="bi bi-bag-fill" [routerLink]="'/admin/pedidos'" routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact: true}"></i>
+      <h2 class="number" *ngIf="getQuantidade() != 0 as quatidade">{{getQuantidade()}}</h2>
+      <h2 class="description">PEDIDOS</h2>
+    </div>
+
+    <div class="item">
+      <i class="bi bi-cart-fill" [routerLink]="'/admin/produtos'" routerLinkActive="active"
+      [routerLinkActiveOptions]="{exact: true}"></i>
+      <h2 class="description" >PRODUTOS</h2>
+    </div>
+
+    <div class="item">
+      <i class="bi bi-credit-card-2-front-fill" [routerLink]="'/admin/pagamentos'" routerLinkActive="active"
+      [routerLinkActiveOptions]="{exact: true}"></i>
+      <h2 class="description" >PAGAMENTOS</h2>
+    </div>
+
+    <div class="item">
+      <i class="bi bi-ticket-perforated-fill" [routerLink]="'/admin/cupons'" routerLinkActive="active"
+      [routerLinkActiveOptions]="{exact: true}"></i>
+      <h2 class="description">CUPONS</h2>
+    </div>
+
+    <div class="item">
+      <i class="bi bi-house-door-fill" [routerLink]="'/admin/enderecos'" routerLinkActive="active"
+      [routerLinkActiveOptions]="{exact: true}"></i>
+      <h2 class="description">ENDEREÇOS</h2>
+    </div>
+
+    <div class="item">
+      <i class="bi bi-send-fill" [routerLink]="'/admin/notificacao'" routerLinkActive="active"
+      [routerLinkActiveOptions]="{exact: true}"></i>
+      <h2 class="description">NOTIFICAÇÃO</h2>
+    </div>
+
+    <div class="item">
+      <i class="bi bi-shop-window" [routerLink]="'/admin/loja'" routerLinkActive="active"
+      [routerLinkActiveOptions]="{exact: true}"></i>
+      <h2 class="description">LOJA</h2>
+    </div>
+
+    <div class="item">
+      <i class="bi bi-bar-chart-fill" [routerLink]="'/admin/relatorio'" routerLinkActive="active"
+      [routerLinkActiveOptions]="{exact: true}"></i>
+      <h2 class="description">RELATÓRIO</h2>
+    </div>
+
+  </nav>
+</header>

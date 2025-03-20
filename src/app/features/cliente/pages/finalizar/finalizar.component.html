@@ -1,0 +1,120 @@
+<app-header></app-header>
+
+<div *ngIf="showAddAddress" class="overlay">
+  <app-form-endereco (updateEndereco)="onUpdateEnderecos()" *ngIf="showAddAddress"
+    (close)="toggleAddAddress()"></app-form-endereco>
+</div>
+<div *ngIf="showAddCupom" class="overlay">
+  <app-form-cupons (cupomSelecionado)="onCupomSelecionado($event)" *ngIf="showAddCupom"
+    (close)="toggleAddCupom()"></app-form-cupons>
+</div>
+
+<!-- Tela de carregamento -->
+<div class="loading-overlay" *ngIf="isLoading">
+  <div class="spinner"></div>
+</div>
+
+<main>
+  <aside class="back">
+    <div>
+      <i class="bi bi-arrow-left-short" [routerLink]="['/', dynamicParam, 'carrinho']"></i>
+      <p>FINALIZAR PEDIDO</p>
+    </div>
+    <hr>
+  </aside>
+
+  <section class="cliente">
+    <p>ENTREGAR PARA:</p>
+    <h1>{{ usuario.nome.toUpperCase() }}</h1>
+  </section>
+
+  <section class="entrega">
+    <h2>ESCOLHA FORMA DE ENTREGA</h2>
+    <div class="enderecos">
+      <div class="endereco" *ngFor="let endereco of getEnderecos(); let i = index">
+        <p>BAIRRO {{ endereco.bairro.toUpperCase() }},
+          RUA {{ endereco.rua.toUpperCase() }}, {{ endereco.numero }}
+          <span *ngIf="endereco.complemento">, {{ endereco.complemento.toUpperCase() }}</span>
+        </p>
+        <input class="checkbox" type="checkbox" [checked]="selectedAddress === i" (change)="selectAddress(i)"
+          [id]="'checkbox1' + i">
+        <label [for]="'checkbox1' + i"></label>
+      </div>
+    </div>
+    <hr>
+    <h3 (click)="toggleAddAddress()">+ ADICIONAR ENDEREÇO</h3>
+  </section>
+
+  <section class="pagamento" dis>
+    <h2>ESCOLHA FORMA DE PAGAMENTO</h2>
+    <div class="formas">
+      <div class="forma" *ngFor="let pagamento of getPagamentos(); let i = index">
+        <p> {{ pagamento.nome.toUpperCase() }} </p>
+        <input class="checkbox" type="checkbox" [checked]="selectedPagamento === i" (change)="selectPagamento(i)"
+          [id]="'checkbox2' + i">
+        <label [for]="'checkbox2' + i"></label>
+      </div>
+    </div>
+  </section>
+
+  <section class="observacao">
+    <textarea placeholder="OBSERVAÇÕES
+      EX: TROCO PARA R$50.00" [(ngModel)]="observacao" name="observacao" class="textarea"></textarea>
+  </section>
+
+  <section class="cupom">
+    <button (click)="toggleAddCupom()" class="adicionar">
+      <h2>+ ADICIONAR CUPOM</h2>
+    </button>
+    <div *ngIf="cupomSelecionado as cupom" class="cupomSelecionado">
+      <div>
+        <h1>{{ cupom.nome.toUpperCase() }}</h1>
+        <p>{{ cupom.descricao.toUpperCase() }}</p>
+        <p>PARA PEDIDO ACIMA DE: {{ cupom.valorParaPedido | currency:'BRL':'symbol':'1.2-2' }} </p>
+        <h1>VALIDADE: {{ cupom.dataDeValidade | date:'dd/MM/yyyy'}}</h1>
+      </div>
+      <img src="../../../assets/logo-cupom.png" alt="">
+    </div>
+    <h2 *ngIf="cupomSelecionado" (click)="excluirCompum()">EXLUIR CUPOM</h2>
+  </section>
+
+  <section class="informacoes">
+    <hr>
+    <div class="subtotal">
+      <h1>SUBTOTAL</h1>
+      <span *ngIf="carrinho.id; else subtotal"> {{ carrinho.total | currency:'BRL':'symbol':'1.2-2' }}</span>
+      <ng-template #subtotal>
+        <span>R$0.00</span>
+      </ng-template>
+    </div>
+    <div class="desconto">
+      <h1>DESCONTO</h1>
+      <span *ngIf="cupomSelecionado; else cupom">{{ cupomSelecionado.valor | currency:'BRL':'symbol':'1.2-2' }}</span>
+      <ng-template #cupom>
+        <span>R$0.00</span>
+      </ng-template>
+    </div>
+    <div class="taxa-de-entrega">
+      <h1>TAXA DE ENTREGA</h1>
+      <span *ngIf="endereco.id !== null; else taxa">{{ endereco.taxaDeEntrega | currency:'BRL':'symbol':'1.2-2'
+        }}</span>
+      <ng-template #taxa>
+        <span>R$0.00</span>
+      </ng-template>
+    </div>
+    <div class="total">
+      <h1>TOTAL</h1>
+      <h1>{{ calcularTotal(carrinho.total) | currency:'BRL':'symbol':'1.2-2' }}</h1>
+    </div>
+  </section>
+
+  <div *ngIf="erro" class="erro">
+    <p>{{ erro }}</p>
+  </div>
+
+  <button (click)="submit()" class="confirmar">
+    <h2>CONFIRMAR</h2>
+  </button>
+
+</main>
+<app-footer></app-footer>

@@ -1,0 +1,19 @@
+<app-header></app-header>
+<main>
+  <aside class="back">
+    <div>
+      <i class="bi bi-arrow-left-short" [routerLink]="['/', dynamicParam]"></i>
+      <p>INFORMAÇÕES DE PERFIL</p>
+    </div>
+    <hr>
+  </aside>
+  <h1>Ola, {{ usuario.nome }} (+{{usuario.telefone}})</h1>
+
+  <div class="paginas" >
+    <p [routerLink]="['/', dynamicParam, 'cliente', 'cupons']" >MEUS CUPONS</p>
+    <p [routerLink]="['/', dynamicParam, 'cliente', 'enderecos']" >MEUS ENDEREÇOS</p>
+    <p [routerLink]="['/', dynamicParam, 'alterar']" >ALTERAR INFORMAÇÔES</p>
+    <p (click)="logout()" class="logout">SAIR</p>
+  </div>
+</main>
+<app-footer></app-footer>

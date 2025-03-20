@@ -1,0 +1,58 @@
+<app-header *ngIf="getLoja()"></app-header>
+
+<main *ngIf="getLoja()">
+  <aside>
+    <h2 *ngIf="getCupons().length" class="cupom"> <i class="bi bi-emoji-laughing-fill"></i> VOCÊ POSSUI CUPONS </h2>
+    <div>
+      <p *ngIf="getLoja()?.status; else fechada" class="status aberta">● Aberta</p>
+      <ng-template #fechada>
+        <p class="status fechada">● Fechada</p>
+      </ng-template>
+      <p [routerLink]="['/', dynamicParam, 'detalhes']" class="detalhes">Datalhes da loja</p>
+    </div>
+  </aside>
+
+  <!-- MENU -->
+  <div class="menu" #menuContainer>
+    <div class="menu-container">
+      <ng-container *ngFor="let item of getProdutos()">
+        <a *ngIf="item.produtos.length > 0" [href]="'/' + dynamicParam + '#' + item.categoria.nome " class="menu-item">
+          {{item.categoria.nome.toUpperCase()}}
+        </a>
+      </ng-container>
+    </div>
+  </div>
+
+  <!-- PEÇA NOVAMENTE -->
+  <section *ngIf="getUltimosPedidos()?.length" class="peca-novamente">
+    <h1>PEÇA NOVAMENTE</h1>
+    <div class="conteudo-1">
+      <app-card-pedido-anterior [getUltimosPedidos]="getUltimosPedidosFilter()" ></app-card-pedido-anterior>
+    </div>
+  </section>
+
+  <!-- PROMOÇÂO  -->
+  <section class="promocao" id="promocao" *ngIf="getPromocao().length > 0">
+    <h1>PROMOÇÃO</h1>
+    <div class="conteudo-2">
+      <i class="bi bi-caret-left-fill" (click)="showPrevCard()"></i>
+
+      <app-card-promocao [getPromocao]="[getPromocao()[currentIndex]]"></app-card-promocao>
+
+      <i class="bi bi-caret-right-fill" (click)="showNextCard()"></i>
+    </div>
+  </section>
+
+  <!-- PRODUTOS -->
+  <ng-container *ngFor="let item of getProdutos()">
+    <section *ngIf="item.produtos.length > 0" class="categoria" [id]="item.categoria.nome">
+      <h1 >{{item.categoria.nome.toUpperCase()}}</h1>
+      <div class="produtos">
+        <app-card-produto [getProdutos]="item.produtos"></app-card-produto>
+      </div>
+    </section>
+  </ng-container>
+
+</main>
+
+<app-footer *ngIf="getLoja()"></app-footer>

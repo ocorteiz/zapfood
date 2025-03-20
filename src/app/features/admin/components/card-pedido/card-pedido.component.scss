@@ -1,0 +1,84 @@
+:host {
+
+  h1,
+  h2 {
+    color: #58658c;
+  }
+
+  div.pedido {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    background-color: var(--white);
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.238);
+    transition: .3s;
+
+    &:hover {
+      box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.382);
+    }
+
+    div.hr {
+      height: 1px;
+      background-color: #58658c;
+      margin: 5px 0px;
+    }
+
+    span {
+      color: #58658c;
+      font-weight: 300;
+      font-size: 1em;
+    }
+
+    div.cliente {
+      display: flex;
+      justify-content: space-between;
+
+      h2.num-pedido {
+        color: gray;
+      }
+    }
+
+    div.btns {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 20px;
+
+      button {
+        display: flex;
+        justify-content: center;
+        padding: 5px;
+        width: 100px;
+
+        h2 {
+          color: var(--white);
+        }
+
+        &:hover {
+          transform: scale(1.03);
+        }
+
+      }
+
+      button.negar {
+        background-color: red;
+      }
+
+      i {
+        color: #58658c;
+        font-size: 1.5em;
+        margin-left: auto;
+        transition: .3s;
+
+        &:hover {
+          transform: scale(1.03);
+        }
+      }
+    }
+
+  }
+
+}

@@ -1,0 +1,21 @@
+<app-header></app-header>
+<main>
+  <aside class="back">
+    <div>
+      <i class="bi bi-arrow-left-short" [routerLink]="['/', dynamicParam, 'perfil']"></i>
+      <p>MEUS ENDEREÇOS</p>
+    </div>
+    <hr>
+  </aside>
+  <section *ngFor="let endereco of getEnderecos()" class="enderecos">
+
+    <div class="endereco">
+      <h2>BAIRRO: {{ endereco.bairro.toUpperCase() }}</h2>
+      <p>RUA: {{ endereco.rua.toUpperCase() }} | NUMERO: {{ endereco.numero }} <span *ngIf="endereco.complemento">| COMPLEMENTO: {{
+          endereco.complemento.toUpperCase() }} </span> </p>
+      <p class="excluir" (click)="deleteEndereco(endereco.id)">EXCLUIR</p>
+    </div>
+
+  </section>
+</main>
+<app-footer></app-footer>

@@ -1,0 +1,36 @@
+<app-header></app-header>
+<main>
+  <aside class="menu-status">
+    <div class="container-status">
+      <h2 class="item-status active" (click)="selectStatus($event, 'ACEITACAO'); findByStatusPedido('ACEITACAO')">
+        AGUARDANDO ACEITAÇÃO
+      </h2>
+      <h2 class="item-status" (click)="selectStatus($event, 'PREPARANDO'); findByStatusPedido('PREPARANDO')">
+        EM PREPARO
+      </h2>
+      <h2 class="item-status" (click)="selectStatus($event, 'ENVIANDO'); findByStatusPedido('ENVIANDO')">
+        A CAMINHO
+      </h2>
+      <h2 class="item-status" (click)="selectStatus($event, 'FINALIZADO'); findByStatusPedido('FINALIZADO')">
+        FINALIZADO
+      </h2>
+      <h2 class="item-status" (click)="selectStatus($event, 'NEGADO'); findByStatusPedido('NEGADO')">
+        NEGADO
+      </h2>
+    </div>
+
+    <hr>
+  </aside>
+
+  <section class="conteudo">
+
+    <div class="pedidos">
+      <label>
+        <i class="bi bi-search"></i>
+        <input type="text" placeholder="PROCURE POR PEDIDO" [(ngModel)]="searchText">
+      </label>
+      <app-card-pedido [pedidos]="filteredPedidos" (messageEvent)="receberMensagem($event)"></app-card-pedido>
+    </div>
+
+  </section>
+</main>

@@ -1,0 +1,66 @@
+<section *ngIf="mode === 'add'" class="form-adicional">
+  <aside class="back">
+    <div>
+      <i class="bi bi-arrow-left-short" (click)="closeModal()"></i>
+      <p>CADASTRAR ESPECIFICAÇÃO</p>
+    </div>
+    <hr>
+  </aside>
+
+  <form (ngSubmit)="onSubmitCadastro()" [formGroup]="especificacaoForm">
+
+    <label for="nome-input" class="nome label">
+      <h2>NOME: </h2>
+      <input id="nome-input" class="nome-input" type="text" formControlName="nome" name="nome" placeholder="EX: LEITE NINHO" required>
+    </label>
+
+    <label for="descricao-input" class="descricao label">
+      <h2>DESCRIÇÃO: </h2>
+      <input id="descricao-input" class="descricao-input" type="text" formControlName="descricao" name="descricao" placeholder="EX: APROXIMADAMENTE 150g" required>
+    </label>
+
+    <label for="categoria-input" class="preco label">
+      <h2>CATEGORIA: </h2>
+      <select name="categoria-input" id="categoria-input" formControlName="idCategoria" required>
+        <option disabled selected>SELECIONE UMA CATEGORIA</option>
+        <option *ngFor="let categoria of getCategorias()" [ngValue]="categoria.id">{{ categoria.nome.toUpperCase() }}</option>
+      </select>
+    </label>
+
+    <div class="erros">
+      <p>{{erro.toUpperCase()}}</p>
+    </div>
+
+    <button type="submit">
+      <h2>CADASTRAR</h2>
+    </button>
+
+  </form>
+</section>
+
+<section *ngIf="mode === 'update'" class="form-adicional" >
+  <aside class="back">
+    <div>
+      <i class="bi bi-arrow-left-short" (click)="closeModal()"></i>
+      <p>ATUALIZAR ESPECIFICAÇÃO</p>
+    </div>
+    <hr>
+  </aside>
+
+  <form (ngSubmit)="onSubmitUpdate()" *ngIf="getEspecificacao() as adicional">
+
+    <label for="descricao-input" class="descricao label">
+      <h2>DESCRIÇÃO: </h2>
+      <input id="descricao-input" class="descricao-input" type="text" placeholder="EX: APROXIMADAMENTE 150g" [(ngModel)]="adicional.descricao" name="descricao" required>
+    </label>
+
+    <div class="erros">
+      <p>{{erro.toUpperCase()}}</p>
+    </div>
+
+    <button type="submit">
+      <h2>ATUALIZAR</h2>
+    </button>
+
+  </form>
+</section>

@@ -1,0 +1,109 @@
+<app-header></app-header>
+<aside class="back">
+  <div>
+    <i class="bi bi-arrow-left-short" [routerLink]="['/', dynamicParam]"></i>
+    <p>DETALHES DO PRODUTO</p>
+  </div>
+  <hr>
+</aside>
+<main>
+  <form (ngSubmit)="onSubmit()">
+
+    <!-- PRODUTO -->
+
+    <section *ngIf="getProduto() as produto" [id]="produto.id" class="produto">
+      <img [src]="getImageUrl(produto.imagem)" alt="{{ produto.nome }}">
+      <div class="conteudo">
+        <div class="text">
+          <h1>{{ produto.nome.toUpperCase() }}</h1>
+          <p>{{ produto.descricao.toUpperCase() }}</p>
+          <h1>{{ produto.preco | currency:'BRL':'symbol':'1.2-2' }}</h1>
+        </div>
+        <button type="button" class="qtd">
+          <i class="bi bi-dash" (click)="decrementarQuantidadeItem()"></i>
+          <span class="qtd" type="number">{{quantidade}}</span>
+          <i class="bi bi-plus-lg" (click)="incrementeQuantidadeItem()"></i>
+        </button>
+      </div>
+    </section>
+
+    <!-- ESPECIFICAÇÕES -->
+
+    <section *ngFor="let lista of getEspecificacoes()" class="especificacoes">
+      <div class="title" (click)="onDivClick($event)">
+        <div>
+          <h2>{{ lista.categoria.nome.toUpperCase() }} <span>(OBRIGATÓRIO)</span></h2>
+          <p *ngIf="lista.categoria.minimoPorCategoria === 1" >EXCOLHA {{ lista.categoria.minimoPorCategoria }} ITEM</p>
+          <p *ngIf="lista.categoria.minimoPorCategoria > 1" >EXCOLHA {{ lista.categoria.minimoPorCategoria }} ITENS</p>
+        </div>
+        <i class="bi bi-caret-down-fill arrow"></i>
+      </div>
+
+      <div *ngFor="let especificacao of lista.especificacoes" class="especificacao">
+        <div class="conteudo">
+          <div class="text">
+            <h2>{{ especificacao.nome.toUpperCase() }}</h2>
+            <p>{{ especificacao.descricao.toUpperCase() }}</p>
+          </div>
+        </div>
+
+        <div class="checkbox">
+          <input
+            type="checkbox"
+            id="checkbox-{{ especificacao.id }}"
+            [checked]="especificacao.selecionado"
+            [disabled]="!especificacao.selecionado && totalSelecionado(lista.especificacoes) >= lista.categoria.minimoPorCategoria"
+            (change)="toggleEspecificacao(especificacao, lista.categoria.minimoPorCategoria, lista.especificacoes)"
+          />
+          <label for="checkbox-{{ especificacao.id }}" class="custom-checkbox"></label>
+        </div>
+      </div>
+    </section>
+
+    <!-- ADICIONAIS -->
+
+    <section *ngFor="let lista of getAdicionais()" class="adicionais">
+      <div class="title" (click)="onDivClick($event)">
+        <div>
+          <h2>{{ lista.categoria.nome.toUpperCase() }}</h2>
+          <p>EXCOLHA ATÉ {{ lista.categoria.maximoPorCategoria }} ITENS</p>
+        </div>
+        <i class="bi bi-caret-down-fill arrow"></i>
+      </div>
+
+      <div *ngFor="let adicional of lista.adicionais" class="adicional">
+        <div class="conteudo">
+          <div class="text">
+            <h2>{{ adicional.nome.toUpperCase() }}</h2>
+            <p>{{ adicional.descricao.toUpperCase() }}</p>
+            <h3 class="preco">{{ adicional.preco | currency:'BRL':'symbol':'1.2-2' }}</h3>
+          </div>
+        </div>
+
+        <button type="button" class="qtd">
+          <i class="bi bi-dash" (click)="decrementarQuantidadeAdicional(adicional)"></i>
+          <span class="qtd" type="number">{{adicional.quantidade}}</span>
+          <i class="bi bi-plus-lg"
+            (click)="incrementarQuantidadeAdicional(adicional, lista.categoria.maximoPorCategoria, lista.adicionais)"></i>
+        </button>
+      </div>
+    </section>
+
+    <section class="obervacao">
+      <h2>OBSERVAÇÕES</h2>
+      <textarea placeholder="EX: TIRE A CEBOLA" [(ngModel)]="observacao" name="observacao"
+        class="observacao"></textarea>
+    </section>
+
+    <div *ngIf="erro" class="erro">
+      <h2>{{ erro }}</h2>
+    </div>
+
+    <button *ngIf="getProduto() as produto" type="submit" class="avancar">
+      <h2>AVANÇAR</h2>
+      <h2>{{ calcularTotal(produto) | currency:'BRL':'symbol':'1.2-2' }}</h2>
+    </button>
+
+  </form>
+</main>
+<app-footer></app-footer>

@@ -1,0 +1,37 @@
+<div *ngIf="getLoja() as loja" class="logo">
+  <img [src]="getImageUrl(loja.logo)" alt="">
+</div>
+<div class="form register">
+  <i class="bi bi-x-lg" [routerLink]="['/', dynamicParam]"></i>
+  <h1>Ola, seja bem vindo</h1>
+  <p class="p">Faça seu cadastro</p>
+  <form  (ngSubmit)="onSubmit()" #form="ngForm">
+    <label>
+      <input placeholder="Nome" type="text"  name="nome" required  [(ngModel)]="usuario.nome"/>
+    </label>
+
+    <label>
+      <input placeholder="Telefone: (xx) x xxxx-xxxx" type="text" name="telefone" required  [(ngModel)]="usuario.telefone" (input)="onPhoneInput($event)" autocomplete="tel"/>
+    </label>
+
+    <label>
+      <input placeholder="Senha" type="password"  name="senha" required  [(ngModel)]="usuario.password" autocomplete="current-password"/>
+    </label>
+
+    <label>
+      <input placeholder="Confirme sua senha" type="password"  name="confirme-senha" required  autocomplete="new-password" [(ngModel)]="usuario.confirmePassowrd"/>
+    </label>
+
+    <div *ngIf="erro" class="erro">
+      <p>{{ erro.toUpperCase() }}</p>
+    </div>
+
+    <label for="login" [routerLink]="['/', dynamicParam, 'cliente', 'login']">
+      <a  >Ja possuo conta</a>
+    </label>
+
+    <button type="submit">
+      <h2>CADASTRAR</h2>
+    </button>
+  </form>
+</div>

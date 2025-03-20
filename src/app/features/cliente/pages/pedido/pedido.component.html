@@ -1,0 +1,120 @@
+<app-header></app-header>
+<main>
+  <aside class="back">
+    <div>
+      <i class="bi bi-arrow-left-short" [routerLink]="['/', dynamicParam, 'meus-pedidos']"></i>
+      <p>DETALHES DO PEDIDO</p>
+    </div>
+    <hr>
+  </aside>
+
+  <section class="pedido info">
+    <div>
+      <h2>PEDIDO #{{ getPedido()?.id }}</h2>
+      <p>EM {{ getPedido()?.dataDeCriacao | date: 'dd/MM/yyyy HH:mm:ss' }}</p>
+    </div>
+
+    <section class="status">
+      <h2 class="title">STATUS DO PEDIDO</h2>
+      <div class="progress-bar">
+        <div class="step" id="step-1"
+          [class.completed]="pedidoStatus() === 'AGUARDANDO ACEITACAO' || pedidoStatus() === 'EM PREPARO' || pedidoStatus() === 'A CAMINHO' || pedidoStatus() === 'FINALIZADO'">
+          <span class="step-label"
+            [class.completed]="pedidoStatus() === 'AGUARDANDO ACEITACAO' || pedidoStatus() === 'EM PREPARO' || pedidoStatus() === 'A CAMINHO' || pedidoStatus() === 'FINALIZADO'">
+            AGUARDANDO ACEITAÇÃO
+          </span>
+        </div>
+        <div class="line"
+          [class.completed]="pedidoStatus() === 'EM PREPARO' || pedidoStatus() === 'A CAMINHO' || pedidoStatus() === 'FINALIZADO'">
+        </div>
+        <div class="step" id="step-2"
+          [class.completed]="pedidoStatus() === 'EM PREPARO' || pedidoStatus() === 'A CAMINHO' || pedidoStatus() === 'FINALIZADO'">
+          <span class="step-label"
+            [class.completed]="pedidoStatus() === 'EM PREPARO' || pedidoStatus() === 'A CAMINHO' || pedidoStatus() === 'FINALIZADO'">
+            SENDO PREPARADO
+          </span>
+        </div>
+        <div class="line" [class.completed]="pedidoStatus() === 'A CAMINHO' || pedidoStatus() === 'FINALIZADO'"></div>
+        <div class="step" id="step-3"
+          [class.completed]="pedidoStatus() === 'A CAMINHO' || pedidoStatus() === 'FINALIZADO'">
+          <span class="step-label"
+            [class.completed]="pedidoStatus() === 'A CAMINHO' || pedidoStatus() === 'FINALIZADO'">
+            A CAMINHO
+          </span>
+        </div>
+        <div class="line" [class.completed]="pedidoStatus() === 'FINALIZADO'"></div>
+        <div class="step" id="step-4" [class.completed]="pedidoStatus() === 'FINALIZADO'">
+          <span class="step-label" [class.completed]="pedidoStatus() === 'FINALIZADO'">
+            PEDIDO FINALIZADO
+          </span>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <section class="entrega info">
+    <h2 class="title">FORMA DE ENTREGA</h2>
+    <p class="endereco">BAIRRO {{ getPedido()?.endereco?.bairro?.toUpperCase() }}, RUA {{ getPedido()?.endereco?.rua?.toUpperCase()
+      }}, Nº{{ getPedido()?.endereco?.numero }}
+      <span *ngIf="getPedido()?.endereco?.complemento">, {{
+        getPedido()?.endereco?.complemento?.toUpperCase() }} </span>
+    </p>
+  </section>
+
+  <section class="pagamento info">
+    <h2 class="title">FORMA DE PAGAMENTO</h2>
+    <div>
+      <p> {{getPedido()?.metodoDePagamento?.toUpperCase() }} </p>
+    </div>
+  </section>
+
+  <section class="itens info">
+    <h2 class="title">ITENS DO PEDIDO</h2>
+    <div>
+      <app-card-item [getItens]="getPedido()?.itens || []" [visible]="false"></app-card-item>
+    </div>
+  </section>
+
+  <section class="cupom info" *ngIf="getPedido()?.cupom as cupom">
+    <h2 class="title">CUPOM</h2>
+    <div>
+      <div class="cupomSelecionado">
+        <div>
+          <h1>{{ cupom.nome.toUpperCase() }}</h1>
+          <p>{{ cupom.descricao.toUpperCase() }}</p>
+          <p>PARA PEDIDO ACIMA DE: {{ cupom.valorParaPedido | currency:'BRL':'symbol':'1.2-2' }} </p>
+          <h1>VALIDADE: {{ cupom.dataDeValidade | date:'dd/MM/yyyy'}}</h1>
+        </div>
+        <img src="../../../assets/logo-cupom.png" alt="">
+      </div>
+    </div>
+  </section>
+
+  <section *ngIf="getPedido()?.observacao as observacao" class="observacao info">
+    <h2 class="title">OBSERVAÇÃO</h2>
+    <div>
+      <p>{{ observacao.toUpperCase() }}</p>
+    </div>
+  </section>
+
+  <section class="valores info">
+    <hr>
+    <div class="subtotal">
+      <h1>SUBTOTAL</h1>
+      <span> {{ getPedido()?.subtotal | currency:'BRL':'symbol':'1.2-2'}} </span>
+    </div>
+    <div class="desconto">
+      <h1>DESCONTO</h1>
+      <span> {{ getPedido()?.desconto | currency:'BRL':'symbol':'1.2-2'}} </span>
+    </div>
+    <div class="taxa-de-entrega">
+      <h1>TAXA DE ENTREGA</h1>
+      <span> {{ getPedido()?.taxaDeEntrega | currency:'BRL':'symbol':'1.2-2'}} </span>
+    </div>
+    <div class="total">
+      <h1>TOTAL</h1>
+      <h1> {{ getPedido()?.total| currency:'BRL':'symbol':'1.2-2'}} </h1>
+    </div>
+  </section>
+</main>
+<app-footer></app-footer>

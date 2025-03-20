@@ -1,0 +1,309 @@
+<app-header></app-header>
+
+<!-- FORM PRODUTO -->
+
+<div *ngIf="showAddProduto" class="overlay">
+  <app-form-produto (close)="toggleAddProduto()" (messageEvent)="receberMensagem($event)"
+    [mode]="mode"></app-form-produto>
+</div>
+
+<!-- FORM CATEGORIA DE PRODUTO -->
+
+<div *ngIf="showAddCategoriaProduto" class="overlay">
+  <app-form-categoria-produto *ngIf="showAddCategoriaProduto" (messageEvent)="receberMensagem($event)"
+    (close)="toggleAddCategoriaProduto()"></app-form-categoria-produto>
+</div>
+
+<!-- FORM ADICIONAL -->
+
+<div *ngIf="showAddAdicional" class="overlay">
+  <app-form-adicional *ngIf="showAddAdicional" (close)="toggleAddAdicional()"
+    (messageEvent)="receberMensagem($event)"></app-form-adicional>
+</div>
+
+<!-- FORM CATEGORIA DE ADICIONAL -->
+
+<div *ngIf="showAddCategoriaAdicional" class="overlay">
+  <app-form-categoria-adicional *ngIf="showAddCategoriaAdicional" (close)="toggleAddCategoriaAdicional()" (messageEvent)="receberMensagem($event)"></app-form-categoria-adicional>
+</div>
+
+<!-- FORM ESPECIFICACAO -->
+
+<div *ngIf="showAddEspecificacao" class="overlay">
+  <app-form-especificacao *ngIf="showAddEspecificacao" (close)="toggleAddEspecificao()"
+    (messageEvent)="receberMensagem($event)"></app-form-especificacao>
+</div>
+
+<!-- FORM CATEGORIA DE ESPECIFICACAO -->
+
+<div *ngIf="showAddCategoriaEspecificacao" class="overlay">
+  <app-form-categoria-especificacao *ngIf="showAddCategoriaEspecificacao" (close)="toggleAddCategoriaEspecificacao()" (messageEvent)="receberMensagem($event)"></app-form-categoria-especificacao>
+</div>
+
+<!-- CONTAINER DELETE CATEGORIA DE ESPECIFICACAO -->
+
+<div *ngIf="showDeleteCategoriaEspecificacao" class="overlay">
+  <div class="conteudo">
+    <aside>
+      <div class="title">
+        <i class="bi bi-arrow-left-short" (click)="toggleDeleteCategoriaEspecificacao(null)"></i>
+        <p>ATENÇÃO</p>
+      </div>
+      <hr>
+    </aside>
+
+    <p class="description">AO DELETAR CATEGORIA DE ESPECIFICAÇÕES TODOS AS ESPECIFICAÇÕES ASSOCIADOS A ELA SERÃO
+      DELETADOS TAMBEM</p>
+    <hr>
+    <button (click)="deleteCategoriaDeEspecificacoes(id)">
+      <h2>DELETAR</h2>
+    </button>
+  </div>
+</div>
+
+<!-- CONTAINER DELETE CATEGORIA DE ADICIONAL -->
+
+<div *ngIf="showDeleteCategoriaAdicional" class="overlay">
+  <div class="conteudo">
+    <aside>
+      <div class="title">
+        <i class="bi bi-arrow-left-short" (click)="toggleDeleteCategoriaAdicional(null)"></i>
+        <p>ATENÇÃO</p>
+      </div>
+      <hr>
+    </aside>
+
+    <p class="description">AO DELETAR CATEGORIA DE ADICIONAIS TODOS OS ADICIONAIS ASSOCIADOS A ELA SERÃO
+      DELETADOS TAMBEM</p>
+    <hr>
+    <button (click)="deleteCategoriaDeAdicionais(id)">
+      <h2>DELETAR</h2>
+    </button>
+  </div>
+</div>
+
+<!-- CONTAINER DELETE CATEGORIA DE PRODUTO -->
+
+<div *ngIf="showDeleteCategoriaProduto" class="overlay">
+  <div class="conteudo">
+    <aside>
+      <div class="title">
+        <i class="bi bi-arrow-left-short" (click)="toggleDeleteCategoriaProduto(null)"></i>
+        <p>ATENÇÃO</p>
+      </div>
+      <hr>
+    </aside>
+
+    <p class="description">AO DELETAR CATEGORIA DE PRODUTOS TODOS OS PRODUTOS ASSOCIADOS A ELA SERÃO DELETADOS
+      TAMBEM</p>
+    <hr>
+    <button (click)="deleteCategoriaDeProdutos(id)">
+      <h2>DELETAR</h2>
+    </button>
+  </div>
+</div>
+
+<main>
+  <aside class="menu-status">
+    <div class="container-status">
+      <h2 class="item-status active" (click)="selectStatus('PRODUTOS', $event)">
+        PRODUTOS
+      </h2>
+      <h2 class="item-status" (click)="selectStatus('PRODUTOS POR CATEGORIA', $event)">
+        PRODUTOS POR CATEGORIA
+      </h2>
+      <h2 class="item-status" (click)="selectStatus('ADICIONAIS', $event)">
+        ADICIONAIS
+      </h2>
+      <h2 class="item-status" (click)="selectStatus('ADICIONAIS POR CATEGORIA', $event)">
+        ADICIONAIS POR CATEGORIA
+      </h2>
+      <h2 class="item-status" (click)="selectStatus('ESPECIFICAÇÕES', $event)">
+        ESPECIFICAÇÕES
+      </h2>
+      <h2 class="item-status" (click)="selectStatus('ESPECIFICAÇÕES POR CATEGORIA', $event)">
+        ESPECIFICAÇÕES POR CATEGORIA
+      </h2>
+    </div>
+    <hr>
+  </aside>
+
+  <!-- TODOS OS PRODUTOS -->
+
+  <section class="conteudo">
+    <div *ngIf="pagina == 'PRODUTOS'" class="section produtos">
+      <div class="cadastro">
+        <label>
+          <i class="bi bi-search"></i>
+          <input type="text" placeholder="PROCURE POR PRODUTO" [(ngModel)]="searchText">
+        </label>
+        <div class="cadastro">
+          <h2 class="cadastrar" (click)="toggleAddProduto()" (click)="mode = 'promocao'">+ CADASTRAR PROMOÇÃO</h2>
+          <h2 class="cadastrar" (click)="toggleAddProduto()">+ CADASTRAR PRODUTO</h2>
+        </div>
+      </div>
+
+      <div *ngIf="messageSucess" class="alert alert-success">
+        <h2>{{messageSucess.toUpperCase()}}</h2>
+      </div>
+
+      <div *ngIf="messageError" class="alert alert-error">
+        <h2>{{messageError.toUpperCase()}}</h2>
+      </div>
+
+      <app-card-produto (messageEvent)="receberMensagem($event)" [getProdutos]="filteredProdutos">
+      </app-card-produto>
+    </div>
+
+    <!-- PRODUTOS POR CATEGORIA -->
+
+    <div *ngIf="pagina == 'PRODUTOS POR CATEGORIA'" class="section categorias">
+      <div class="cadastro">
+        <label>
+          <i class="bi bi-search"></i>
+          <input type="text" placeholder="PROCURE POR CATEGORIA" [(ngModel)]="searchText">
+        </label>
+        <h2 class="cadastrar" (click)="toggleAddCategoriaProduto()">+ CADASTRAR CATEGORIA</h2>
+      </div>
+
+      <div *ngIf="messageSucess" class="alert alert-success">
+        <h2>{{messageSucess.toUpperCase()}}</h2>
+      </div>
+
+      <div *ngIf="messageError" class="alert alert-error">
+        <h2>{{messageError.toUpperCase()}}</h2>
+      </div>
+
+      <ng-container *ngFor="let lista of filteredProdutosPorCategoria">
+
+        <div class="categoria">
+          <h2>{{ lista.categoria.nome.toUpperCase() }}</h2>
+          <span (click)="toggleDeleteCategoriaProduto(lista.categoria.id)">
+            <i class="bi bi-trash-fill"></i>
+            DELETAR
+          </span>
+        </div>
+        <app-card-produto [getProdutos]="lista.produtos" (messageEvent)="receberMensagem($event)"></app-card-produto>
+      </ng-container>
+    </div>
+
+    <!-- TODOS OS ADICIONAIS -->
+
+    <div *ngIf="pagina == 'ADICIONAIS'" class="section adicionais">
+      <div class="cadastro">
+        <label>
+          <i class="bi bi-search"></i>
+          <input type="text" placeholder="PROCURE POR ADICIONAL" [(ngModel)]="searchText">
+        </label>
+        <h2 class="cadastrar" (click)="toggleAddAdicional()">+ CADASTRAR ADICIONAL</h2>
+      </div>
+
+      <div *ngIf="messageSucess" class="alert alert-success">
+        <h2>{{messageSucess.toUpperCase()}}</h2>
+      </div>
+
+      <div *ngIf="messageError" class="alert alert-error">
+        <h2>{{messageError.toUpperCase()}}</h2>
+      </div>
+
+      <app-card-adicional [getAdicionais]="filteredAdicionais"
+        (messageEvent)="receberMensagem($event)"></app-card-adicional>
+    </div>
+
+    <!-- ADICIONAIS POR CATEGORIA -->
+
+    <div *ngIf="pagina == 'ADICIONAIS POR CATEGORIA'" class="section categorias">
+      <div class="cadastro">
+        <label>
+          <i class="bi bi-search"></i>
+          <input type="text" placeholder="PROCURE POR CATEGORIA" [(ngModel)]="searchText">
+        </label>
+        <h2 class="cadastrar" (click)="toggleAddCategoriaAdicional()">+ CADASTRAR CATEGORIA</h2>
+      </div>
+
+      <div *ngIf="messageSucess" class="alert alert-success">
+        <h2>{{messageSucess.toUpperCase()}}</h2>
+      </div>
+
+      <div *ngIf="messageError" class="alert alert-error">
+        <h2>{{messageError.toUpperCase()}}</h2>
+      </div>
+
+      <ng-container *ngFor="let lista of filteredAdicionaisPorCategoria">
+
+        <div class="categoria">
+          <h2>{{ lista.categoria.nome.toUpperCase() }}</h2>
+          <h3>MAXIMO DE ITENS POR CATEGORIA: {{ lista.categoria.maximoPorCategoria }}</h3>
+          <span (click)="toggleDeleteCategoriaAdicional(lista.categoria.id)">
+            <i class="bi bi-trash-fill"></i>
+            DELETAR
+          </span>
+        </div>
+
+        <app-card-adicional [getAdicionais]="lista.adicionais"
+          (messageEvent)="receberMensagem($event)"></app-card-adicional>
+      </ng-container>
+    </div>
+
+    <!-- TODAS ESPECIFICAÇÕES -->
+
+    <div *ngIf="pagina == 'ESPECIFICAÇÕES'" class="section especificacoes">
+      <div class="cadastro">
+        <label>
+          <i class="bi bi-search"></i>
+          <input type="text" placeholder="PROCURE POR ESPECIFICAÇÕES" [(ngModel)]="searchText">
+        </label>
+        <h2 class="cadastrar" (click)="toggleAddEspecificao()">+ CADASTRAR ESPECIFICAÇÃO</h2>
+      </div>
+
+      <div *ngIf="messageSucess" class="alert alert-success">
+        <h2>{{messageSucess.toUpperCase()}}</h2>
+      </div>
+
+      <div *ngIf="messageError" class="alert alert-error">
+        <h2>{{messageError.toUpperCase()}}</h2>
+      </div>
+
+      <app-card-especificacao [getEspecificacoes]="filteredEspecificacoes"
+      (messageEvent)="receberMensagem($event)" ></app-card-especificacao>
+
+    </div>
+
+    <!-- ESPECIFICAÇÕES POR CATEGORIA -->
+
+    <div *ngIf="pagina == 'ESPECIFICAÇÕES POR CATEGORIA'" class="section categorias">
+      <div class="cadastro">
+        <label>
+          <i class="bi bi-search"></i>
+          <input type="text" placeholder="PROCURE POR CATEGORIA" [(ngModel)]="searchText">
+        </label>
+        <h2 class="cadastrar" (click)="toggleAddCategoriaEspecificacao()">+ CADASTRAR CATEGORIA</h2>
+      </div>
+
+      <div *ngIf="messageSucess" class="alert alert-success">
+        <h2>{{messageSucess.toUpperCase()}}</h2>
+      </div>
+
+      <div *ngIf="messageError" class="alert alert-error">
+        <h2>{{messageError.toUpperCase()}}</h2>
+      </div>
+
+      <ng-container *ngFor="let lista of filteredEspecificacoesPorCategoria">
+
+        <div class="categoria">
+          <h2>{{ lista.categoria.nome.toUpperCase() }}</h2>
+          <h3>MINÍMO DE ITENS POR CATEGORIA: {{ lista.categoria.minimoPorCategoria }}</h3>
+          <span (click)="toggleDeleteCategoriaEspecificacao(lista.categoria.id)">
+            <i class="bi bi-trash-fill"></i>
+            DELETAR
+          </span>
+        </div>
+
+        <app-card-especificacao [getEspecificacoes]="lista.especificacoes"
+        (messageEvent)="receberMensagem($event)" ></app-card-especificacao>
+      </ng-container>
+    </div>
+
+  </section>
+
+</main>
